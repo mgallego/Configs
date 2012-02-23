@@ -3,7 +3,7 @@
 ;; You can delete it, forcing Tramp to reapply the checks.
 
 ((["sudo" "root" "localhost" nil]
-  ("uname" "Linux 2.6.38-8-generic")
+  ("uname" "Linux 3.0.0-12-generic")
   ("test" "test")
   ("remote-path"
    ("/bin" "/usr/bin" "/usr/sbin" "/usr/local/bin"))
@@ -13,5 +13,4 @@
   ("id" "/usr/bin/id")
   ("gid-integer" 0)
   ("readlink" "\\readlink")
-  ("ln" "\\ln")
-  ("uid-integer" 0)))
+  ("ln" "\\ln")))

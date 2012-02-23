@@ -2,7 +2,7 @@
 ;;rutas de carga de archivos .el
 (setq load-path (cons "~/.emacs.d" load-path))
 (add-to-list 'load-path "~/elisp")
-
+(add-to-list 'load-path "~/Dev/lisp/sf.el")
 
 ;; modos
 (require 'identica-mode)
@@ -22,16 +22,20 @@
 (defun clean-php-mode ()
 (interactive)
 (php-mode)
-(setq c-basic-offset 2) ; 2 tabs indenting
-(setq indent-tabs-mode nil)
-(setq fill-column 78)
+;;(setq c-basic-offset 4) ; 2 tabs indenting
+;;(setq indent-tabs-mode nil)
+;;(setq fill-column 78)
 (c-set-offset 'case-label '+)
-(c-set-offset 'arglist-close 'c-lineup-arglist-operators))
+(C-set-offset 'arglist-close 'c-lineup-arglist-operators))
 (c-set-offset 'arglist-intro '+) ; for FAPI arrays and DBTNG
 (c-set-offset 'arglist-cont-nonempty 'c-lineup-math)
 
+(setq c-default-style "bsd"
+      c-basic-offset 4)
+
 ;;yaml
 (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
+(setq yaml-indent-offset 4) ; 2 tabs indenting
 
 
 ;;pruebas sacadas de dotemacs.de
@@ -80,6 +84,52 @@
 
 (require 'color-theme)
 
+(eval-after-load "color-theme"
+  '(progn
+     (color-theme-initialize)
+     (color-theme-dark-laptop)))
+
+
 ;;(set-foreground-color "white")
 ;;(set-cursor-color "green")
 ;;(set-background-color "black")
+
+
+(global-linum-mode t)
+
+(setq scroll-bar-mode-explicit t) 
+(set-scroll-bar-mode `right) 
+
+(tool-bar-mode nil)
+;;(custom-set-faces
+  ;; custom-set-faces was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+;; '(default ((t (:stipple nil :background "black" :foreground "white" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 109 :width normal :foundry "unknown" :family "DejaVu Sans Mono")))))
+
+
+;;pantalla completa con F11
+(defun toggle-fullscreen (&optional f)
+      (interactive)
+      (let ((current-value (frame-parameter nil 'fullscreen)))
+           (set-frame-parameter nil 'fullscreen
+                                (if (equal 'fullboth current-value)
+                                    (if (boundp 'old-fullscreen) old-fullscreen nil)
+                                    (progn (setq old-fullscreen current-value)
+                                           'fullboth)))))
+    (global-set-key [f11] 'toggle-fullscreen)
+    ; Make new frames fullscreen by default. Note: this hook doesn't do
+    ; anything to the initial frame if it's in your .emacs, since that file is
+    ; read _after_ the initial frame is created.
+    (add-hook 'after-make-frame-functions 'toggle-fullscreen)
+
+;;lorem ipsum
+(require 'lorem-ipsum)
+(add-hook 'sgml-mode-hook (lambda ()
+			    (setq Lorem-ipsum-paragraph-separator "<br><br>\n"
+				  Lorem-ipsum-sentence-separator "&nbsp;&nbsp;"
+				  Lorem-ipsum-list-beginning "<ul>\n"
+				  Lorem-ipsum-list-bullet "<li>"
+				  Lorem-ipsum-list-item-end "</li>\n"
+				  Lorem-ipsum-list-end "</ul>\n")))
