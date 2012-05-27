@@ -11,6 +11,9 @@
 (require 'eproject)
 (require 'sf)
 
+
+
+
 ;;configuraciones de modos
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -32,6 +35,13 @@
 
 (setq c-default-style "bsd"
       c-basic-offset 4)
+
+
+;;html
+(add-hook 'html-mode-hook
+        (lambda ()
+          ;; Default indentation is usually 2 spaces, changing to 4.
+          (set (make-local-variable 'sgml-basic-offset) 4)))
 
 ;;yaml
 (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
@@ -82,7 +92,7 @@
 (add-to-list 'ac-dictionary-directories "/home/moises/.emacs.d//ac-dict")
 (ac-config-default)
 
-(require 'color-theme)
+;;(require 'color-theme)
 
 (eval-after-load "color-theme"
   '(progn
@@ -133,3 +143,4 @@
 				  Lorem-ipsum-list-bullet "<li>"
 				  Lorem-ipsum-list-item-end "</li>\n"
 				  Lorem-ipsum-list-end "</ul>\n")))
+
