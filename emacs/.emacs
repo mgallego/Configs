@@ -1,17 +1,21 @@
-
 ;;rutas de carga de archivos .el
 (setq load-path (cons "~/.emacs.d" load-path))
-(add-to-list 'load-path "~/elisp")
-(add-to-list 'load-path "~/Dev/lisp/sf.el")
+(add-to-list 'load-path "~/.emacs.modes")
 
 ;; modos
-(require 'identica-mode)
+;;(require 'identica-mode)
+(add-to-list 'load-path "~/.emacs.modes/php-mode")
 (require 'php-mode)
+(add-to-list 'load-path "~/.emacs.modes/yaml-mode")
 (require 'yaml-mode) ;;http://github.com/yoshiki/yaml-mode  ;;http://www.emacswiki.org/emacs/YamlMode
+(add-to-list 'load-path "~/.emacs.modes/eproject")
 (require 'eproject)
+(add-to-list 'load-path "~/.emacs.modes/sf.el")
 (require 'sf)
-
-
+(add-to-list 'load-path "~/.emacs.modes/lorem-ipsum")
+(require 'lorem-ipsum)
+(add-to-list 'load-path "~/.emacs.modes/auto-complete")
+(require 'auto-complete-config)
 
 
 ;;configuraciones de modos
@@ -49,13 +53,12 @@
 
 
 ;;pruebas sacadas de dotemacs.de
-
 (global-set-key[f3] 'eshell) ;;abre un buffer eshell al pulsar la tecla F3
 (global-set-key[f4] 'sql-mysql)
 
 ;;eliminar backup automático
-
 (setq make-backup-files nil)
+
 
 ;;funciones
 (defun open-dot-emacs ()
@@ -64,12 +67,6 @@
   (find-file "~/.emacs")
 )
 
-;;carga mis archivos de configuracion personalizados
-;;(if (file-exists-p "~/.emacs.d/sf.el")
-;;    (load-file "~/.emacs.d/sf.el"))
-
-;;ruta para el proyecto actual de SF2
-;;(setq SFPath "~/Dev/Picmnt/")
 
 ;;org mode
 (require 'org-install)
@@ -78,46 +75,11 @@
 (define-key global-map "\C-ca" 'org-agenda)
 (setq org-log-done t)
 
-
-;;org-mobile
-;; Set to the location of your Org files on your local system
-(setq org-directory "~/org")
-;; Set to the name of the file where new notes will be stored
-(setq org-mobile-inbox-for-pull "~/org/flagged.org")
-;; Set to <your Dropbox root directory>/MobileOrg.
-(setq org-mobile-directory "~/Dropbox/MobileOrg")
-
-(add-to-list 'load-path "/home/moises/.emacs.d/")
-(require 'auto-complete-config)
-(add-to-list 'ac-dictionary-directories "/home/moises/.emacs.d//ac-dict")
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
 (ac-config-default)
 
-;;(require 'color-theme)
-
-(eval-after-load "color-theme"
-  '(progn
-     (color-theme-initialize)
-     (color-theme-dark-laptop)))
-
-
-;;(set-foreground-color "white")
-;;(set-cursor-color "green")
-;;(set-background-color "black")
-
-
 (global-linum-mode t)
-
-(setq scroll-bar-mode-explicit t) 
-(set-scroll-bar-mode `right) 
-
 (tool-bar-mode nil)
-;;(custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
-;; '(default ((t (:stipple nil :background "black" :foreground "white" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 109 :width normal :foundry "unknown" :family "DejaVu Sans Mono")))))
-
 
 ;;pantalla completa con F11
 (defun toggle-fullscreen (&optional f)
@@ -135,7 +97,6 @@
     (add-hook 'after-make-frame-functions 'toggle-fullscreen)
 
 ;;lorem ipsum
-(require 'lorem-ipsum)
 (add-hook 'sgml-mode-hook (lambda ()
 			    (setq Lorem-ipsum-paragraph-separator "<br><br>\n"
 				  Lorem-ipsum-sentence-separator "&nbsp;&nbsp;"
@@ -144,3 +105,15 @@
 				  Lorem-ipsum-list-item-end "</li>\n"
 				  Lorem-ipsum-list-end "</ul>\n")))
 
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-enabled-themes (quote (wombat))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
