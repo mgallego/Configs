@@ -69,9 +69,14 @@
   (find-file "~/.emacs")
 )
 
+
 ;;KEYS
 (global-set-key[f3] 'eshell) ;;abre un buffer eshell al pulsar la tecla F3
 (global-set-key[f4] 'sql-mysql)
+(global-set-key (kbd "C-c d") 'credmp/flymake-display-err-minibuf)
+(global-set-key (kbd "C-c n") 'my-goto-next-error)
+
+
 
 (defun toggle-fullscreen (&optional f)
       (interactive)
@@ -149,6 +154,30 @@
 (setq flymake-phpcs-standard
   "/usr/share/php/PHP/CodeSniffer/Standards/PSR2")
 (setq flymake-phpcs-show-rule t)
+
+(defun credmp/flymake-display-err-minibuf () 
+      "Displays the error/warning for the current line in the minibuffer"
+      (interactive)
+      (let* ((line-no             (flymake-current-line-no))
+             (line-err-info-list  (nth 0 (flymake-find-err-info flymake-err-info line-no)))
+             (count               (length line-err-info-list))
+             )
+        (while (> count 0)
+           (when line-err-info-list
+           (let* ((file       (flymake-ler-file (nth (1- count) line-err-info-list)))
+                   (full-file  (flymake-ler-full-file (nth (1- count) line-err-info-list)))
+                   (text (flymake-ler-text (nth (1- count) line-err-info-list)))
+                   (line       (flymake-ler-line (nth (1- count) line-err-info-list))))
+              (message "[%s] %s" line text)
+              )
+            )
+          (setq count (1- count)))))
+
+(defun my-goto-next-error ()
+  (interactive)
+  (flymake-goto-next-error)
+  (credmp/flymake-display-err-minibuf)
+)
 
 
 ;;COLUMN WARNING
