@@ -1,12 +1,12 @@
-;;rutas de carga de archivos .el
+;;PATHS
 (setq load-path (cons "~/.emacs.d" load-path))
 (add-to-list 'load-path "~/.emacs.modes")
 
-;; modos
+;; MODES
 (add-to-list 'load-path "~/.emacs.modes/php-mode")
 (require 'php-mode)
 (add-to-list 'load-path "~/.emacs.modes/yaml-mode")
-(require 'yaml-mode) ;;http://github.com/yoshiki/yaml-mode  ;;http://www.emacswiki.org/emacs/YamlMode
+(require 'yaml-mode)
 (add-to-list 'load-path "~/.emacs.modes/eproject")
 (require 'eproject)
 (add-to-list 'load-path "~/.emacs.modes/sf.el")
@@ -23,71 +23,53 @@
 (require 'tomatinho)
 
 
-;;configuraciones de modos
-;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;;php
-(add-to-list 'auto-mode-alist '("\\.module$" . php-mode))
-(add-to-list 'auto-mode-alist '("\\.inc$" . php-mode))
-(add-to-list 'auto-mode-alist '("\\.install$" . php-mode))
-(add-to-list 'auto-mode-alist '("\\.engine$" . php-mode))
-(defun clean-php-mode ()
-(interactive)
-(php-mode)
-(setq c-basic-offset 4) ; 2 tabs indenting
-(setq indent-tabs-mode nil)
-;;(setq fill-column 78)
-(c-set-offset 'case-label '+)
-(C-set-offset 'arglist-close 'c-lineup-arglist-operators))
 
-(c-set-offset 'arglist-intro '+) ; for FAPI arrays and DBTNG
-(c-set-offset 'arglist-cont-nonempty 'c-lineup-math)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;  EMACS  ;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(setq column-number-mode t)
 (setq c-default-style "bsd"
       c-basic-offset 4)
+(setq make-backup-files nil);;eliminar backup automático
+(setq tool-bar-mode nil)
+(global-linum-mode t)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(column-number-mode t)
+ '(custom-enabled-themes (quote (wombat)))
+ '(show-paren-mode t)
+ '(tool-bar-mode nil))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
 
 
-;;html
-(add-hook 'html-mode-hook
-        (lambda ()
-          ;; Default indentation is usually 2 spaces, changing to 4.
-          (set (make-local-variable 'sgml-basic-offset) 4)))
 
-;;yaml
-(add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
-(setq yaml-indent-offset 4) ; 2 tabs indenting
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;  PERSONAL FUNCTIONS  ;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;  AND  ;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;  KEYBINDING  ;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-
-;;pruebas sacadas de dotemacs.de
-(global-set-key[f3] 'eshell) ;;abre un buffer eshell al pulsar la tecla F3
-(global-set-key[f4] 'sql-mysql)
-
-;;eliminar backup automático
-(setq make-backup-files nil)
-
-
-;;funciones
+;;FUNCTIONS
 (defun open-dot-emacs ()
   "opening-dot-emacs"
   (interactive) ;this makes the function a command too
   (find-file "~/.emacs")
 )
 
+;;KEYS
+(global-set-key[f3] 'eshell) ;;abre un buffer eshell al pulsar la tecla F3
+(global-set-key[f4] 'sql-mysql)
 
-;;org mode
-(require 'org-install)
-(add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
-(define-key global-map "\C-cl" 'org-store-link)
-(define-key global-map "\C-ca" 'org-agenda)
-(setq org-log-done t)
-
-(add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
-(ac-config-default)
-
-(global-linum-mode t)
-(tool-bar-mode nil)
-
-;;pantalla completa con F11
 (defun toggle-fullscreen (&optional f)
       (interactive)
       (let ((current-value (frame-parameter nil 'fullscreen)))
@@ -102,7 +84,54 @@
     ; read _after_ the initial frame is created.
     (add-hook 'after-make-frame-functions 'toggle-fullscreen)
 
-;;lorem ipsum
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;  MODES  ;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;PHP
+(add-to-list 'auto-mode-alist '("\\.module$" . php-mode))
+(add-to-list 'auto-mode-alist '("\\.inc$" . php-mode))
+(add-to-list 'auto-mode-alist '("\\.install$" . php-mode))
+(add-to-list 'auto-mode-alist '("\\.engine$" . php-mode))
+(defun clean-php-mode ()
+(interactive)
+(php-mode)
+(setq c-basic-offset 4) ; 2 tabs indenting
+(setq indent-tabs-mode nil)
+;;(setq fill-column 78)
+(c-set-offset 'case-label '+)
+(C-set-offset 'arglist-close 'c-lineup-arglist-operators))
+(c-set-offset 'arglist-intro '+) ; for FAPI arrays and DBTNG
+(c-set-offset 'arglist-cont-nonempty 'c-lineup-math)
+
+
+;;HTML
+(add-hook 'html-mode-hook
+        (lambda ()
+          ;; Default indentation is usually 2 spaces, changing to 4.
+          (set (make-local-variable 'sgml-basic-offset) 4)))
+
+;;YAML
+(add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
+(setq yaml-indent-offset 4) ; 2 tabs indenting
+
+
+;;ORG
+(require 'org-install)
+(add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+(define-key global-map "\C-cl" 'org-store-link)
+(define-key global-map "\C-ca" 'org-agenda)
+(setq org-log-done t)
+
+
+;;AUTOCOMPLETE
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
+(ac-config-default)
+
+
+;;LOREM IPSUM
 (add-hook 'sgml-mode-hook (lambda ()
 			    (setq Lorem-ipsum-paragraph-separator "<br><br>\n"
 				  Lorem-ipsum-sentence-separator "&nbsp;&nbsp;"
@@ -111,36 +140,24 @@
 				  Lorem-ipsum-list-item-end "</li>\n"
 				  Lorem-ipsum-list-end "</ul>\n")))
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-enabled-themes (quote (wombat)))
- '(show-paren-mode t))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
 
-;;flymake php ;;para el codesnifer de PHP
+;;FLYMAKE PHP -- CODE SNIFFER
 (setq flymake-phpcs-command "~/.emacs.modes/emacs-flymake-phpcs/bin/flymake_phpcs")
 (setq flymake-phpcs-standard
   "/usr/share/php/PHP/CodeSniffer/Standards/PSR2")
 (setq flymake-phpcs-show-rule t)
 
+
+;;COLUMN WARNING
 (setq-default fci-rule-column 120)
 (setq fci-handle-truncate-lines nil)
 (add-hook 'after-change-major-mode-hook 'auto-fci-mode)
 (add-hook 'window-size-change-functions 'auto-fci-mode)
-
 (defun auto-fci-mode (&optional unused)
   (if (> (frame-width) 80)
       (fci-mode 1)
     (fci-mode 0))
 )
 
+;;POMODORO
 (global-set-key (kbd "<f12>") 'tomatinho)
-(setq column-number-mode t)
