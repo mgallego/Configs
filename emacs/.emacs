@@ -3,7 +3,6 @@
 (add-to-list 'load-path "~/.emacs.modes")
 
 ;; modos
-;;(require 'identica-mode)
 (add-to-list 'load-path "~/.emacs.modes/php-mode")
 (require 'php-mode)
 (add-to-list 'load-path "~/.emacs.modes/yaml-mode")
@@ -16,7 +15,8 @@
 (require 'lorem-ipsum)
 (add-to-list 'load-path "~/.emacs.modes/auto-complete")
 (require 'auto-complete-config)
-
+(add-to-list 'load-path "~/.emacs.modes/emacs-flymake-phpcs")
+(require 'flymake-phpcs)
 
 ;;configuraciones de modos
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -117,3 +117,10 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+
+;;flymake php ;;para el codesnifer de PHP
+(setq flymake-phpcs-command "~/.emacs.modes/emacs-flymake-phpcs/bin/flymake_phpcs")
+(setq flymake-phpcs-standard
+  "/usr/share/php/PHP/CodeSniffer/Standards/PSR2")
+(setq flymake-phpcs-show-rule t)
