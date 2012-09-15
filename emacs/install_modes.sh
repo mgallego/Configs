@@ -7,6 +7,11 @@ git clone https://github.com/jrockway/eproject.git
 git clone https://github.com/illusori/emacs-flymake-phpcs.git
 git clone https://github.com/alpaker/Fill-Column-Indicator.git
 git clone https://github.com/konr/tomatinho.git
+git clone https://github.com/blipvert/geben-svn.git
+
+cd geben-svn
+make
+cd ..
 
 mkdir lorem-ipsum
 cd lorem-ipsum

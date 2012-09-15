@@ -21,6 +21,8 @@
 (require 'fill-column-indicator)
 (add-to-list 'load-path "~/.emacs.modes/tomatinho")
 (require 'tomatinho)
+(add-to-list 'load-path "~/.emacs.modes/geben-svn")
+(require 'geben)
 
 
 
@@ -75,7 +77,6 @@
 (global-set-key[f4] 'sql-mysql)
 (global-set-key (kbd "C-c d") 'credmp/flymake-display-err-minibuf)
 (global-set-key (kbd "C-c n") 'my-goto-next-error)
-
 
 
 (defun toggle-fullscreen (&optional f)
