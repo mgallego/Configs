@@ -19,6 +19,9 @@
 (require 'flymake-phpcs)
 (add-to-list 'load-path "~/.emacs.modes/Fill-Column-Indicator")
 (require 'fill-column-indicator)
+(add-to-list 'load-path "~/.emacs.modes/tomatinho")
+(require 'tomatinho)
+
 
 ;;configuraciones de modos
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -31,11 +34,12 @@
 (defun clean-php-mode ()
 (interactive)
 (php-mode)
-;;(setq c-basic-offset 4) ; 2 tabs indenting
-;;(setq indent-tabs-mode nil)
+(setq c-basic-offset 4) ; 2 tabs indenting
+(setq indent-tabs-mode nil)
 ;;(setq fill-column 78)
 (c-set-offset 'case-label '+)
 (C-set-offset 'arglist-close 'c-lineup-arglist-operators))
+
 (c-set-offset 'arglist-intro '+) ; for FAPI arrays and DBTNG
 (c-set-offset 'arglist-cont-nonempty 'c-lineup-math)
 
@@ -137,3 +141,5 @@
       (fci-mode 1)
     (fci-mode 0))
 )
+
+(global-set-key (kbd "<f12>") 'tomatinho)
