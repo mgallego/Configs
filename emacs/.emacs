@@ -50,6 +50,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+(setq display-time-24hr-format t    
+      display-time-load-average nil) 
+(display-time)
 
 
 
