@@ -8,6 +8,8 @@ git clone https://github.com/illusori/emacs-flymake-phpcs.git
 git clone https://github.com/alpaker/Fill-Column-Indicator.git
 git clone https://github.com/konr/tomatinho.git
 git clone https://github.com/blipvert/geben-svn.git
+git clone https://github.com/capitaomorte/yasnippet
+git clone https://github.com/barendt/yasnippet-php-mode
 
 cd geben-svn
 make

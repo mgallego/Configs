@@ -23,6 +23,8 @@
 (require 'tomatinho)
 (add-to-list 'load-path "~/.emacs.modes/geben-svn")
 (require 'geben)
+(add-to-list 'load-path "~/.emacs.modes/yasnippet")
+(require 'yasnippet)
 
 
 
@@ -194,3 +196,11 @@
 
 ;;POMODORO
 (global-set-key (kbd "<f12>") 'tomatinho)
+
+
+;;YASNIPPET
+(setq yas-snippet-dirs
+      '("~/.emacs.modes/yasnippet-php-mode"
+        ))
+(setq yas/trigger-key (kbd "C-c s"))
+(yas-global-mode 1)
