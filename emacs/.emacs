@@ -79,6 +79,7 @@
 (global-set-key[f4] 'sql-mysql)
 (global-set-key (kbd "C-c d") 'credmp/flymake-display-err-minibuf)
 (global-set-key (kbd "C-c n") 'my-goto-next-error)
+(global-set-key (kbd "<C-tab>") 'yas/expand)
 
 
 (defun toggle-fullscreen (&optional f)
@@ -202,5 +203,4 @@
 (setq yas-snippet-dirs
       '("~/.emacs.modes/yasnippet-php-mode"
         ))
-(setq yas/trigger-key (kbd "C-c s"))
 (yas-global-mode 1)
