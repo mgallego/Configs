@@ -9,7 +9,7 @@ git clone https://github.com/alpaker/Fill-Column-Indicator.git
 git clone https://github.com/konr/tomatinho.git
 git clone https://github.com/blipvert/geben-svn.git
 git clone https://github.com/capitaomorte/yasnippet
-git clone https://github.com/barendt/yasnippet-php-mode
+git clone https://github.com/mgallego/yasnippet-php-mode.git
 
 cd geben-svn
 make
