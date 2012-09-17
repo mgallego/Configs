@@ -1,6 +1,7 @@
 ;;PATHS
 (setq load-path (cons "~/.emacs.d" load-path))
 (add-to-list 'load-path "~/.emacs.modes")
+(add-to-list 'load-path "~/.emacs.modes/popup-el")
 
 ;; MODES
 (add-to-list 'load-path "~/.emacs.modes/php-mode")
@@ -34,8 +35,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (setq column-number-mode t)
-(setq c-default-style "bsd"
-      c-basic-offset 4)
 (setq make-backup-files nil);;eliminar backup automático
 (setq tool-bar-mode nil)
 (global-linum-mode t)
@@ -107,6 +106,14 @@
 (add-to-list 'auto-mode-alist '("\\.inc$" . php-mode))
 (add-to-list 'auto-mode-alist '("\\.install$" . php-mode))
 (add-to-list 'auto-mode-alist '("\\.engine$" . php-mode))
+
+(setq php-mode-force-pear t)
+(add-hook 'php-mode-user-hook
+      '(lambda ()
+         (setq indent-tabs-mode t)
+         (setq tab-width 4)
+         (setq c-basic-indent 4)))
+
 (defun clean-php-mode ()
 (interactive)
 (php-mode)

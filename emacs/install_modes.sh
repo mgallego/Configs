@@ -11,6 +11,8 @@ git clone https://github.com/konr/tomatinho.git
 git clone https://github.com/blipvert/geben-svn.git
 git clone https://github.com/capitaomorte/yasnippet
 git clone https://github.com/mgallego/yasnippet-php-mode.git
+git clone https://github.com/auto-complete/popup-el.git
+git clone https://github.com/auto-complete/auto-complete.git
 
 cd geben-svn
 make
