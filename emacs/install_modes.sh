@@ -1,3 +1,4 @@
+mkdir .emacs.modes
 cd .emacs.modes
 
 git clone https://github.com/ejmr/php-mode.git
