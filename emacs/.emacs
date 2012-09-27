@@ -49,6 +49,7 @@
  '(column-number-mode t)
  '(custom-enabled-themes (quote (wombat)))
  '(display-time-mode t)
+ '(nxml-child-indent 4)
  '(show-paren-mode t)
  '(tool-bar-mode nil))
 (custom-set-faces
@@ -135,6 +136,7 @@
         (lambda ()
           ;; Default indentation is usually 2 spaces, changing to 4.
           (set (make-local-variable 'sgml-basic-offset) 4)))
+
 
 ;;YAML
 (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
