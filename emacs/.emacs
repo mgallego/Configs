@@ -29,7 +29,7 @@
 (require 'tramp)
 (add-to-list 'load-path "~/.emacs.modes/markdown-mode")
 (require 'markdown-mode)
-
+(load-file "~/.emacs.modes/phpdocumentor.el/phpdocumentor.el")
 
 
 
@@ -57,7 +57,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "Ubuntu Mono" :foundry "unknown" :slant normal :weight normal :height 113 :width normal)))))
+ '(default ((t (:family "DejaVu Sans Mono" :foundry "unknown" :slant normal :weight normal :height 90 :width normal)))))
 (setq display-time-24hr-format t    
       display-time-load-average nil) 
 (display-time)
