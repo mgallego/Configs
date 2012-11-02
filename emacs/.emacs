@@ -57,7 +57,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "DejaVu Sans Mono" :foundry "unknown" :slant normal :weight normal :height 90 :width normal)))))
+ '(default ((t (:family "DejaVu Sans Mono" :foundry "unknown" :slant normal :weight normal :height 109 :width normal)))))
 (setq display-time-24hr-format t    
       display-time-load-average nil) 
 (display-time)
@@ -224,3 +224,32 @@
 ;;MARKDOWN
 (add-to-list 'auto-mode-alist '("\\.markdown" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.md" . markdown-mode))
+
+(defun jean-claude (var)
+  "print-a-php-var-dump"
+  (interactive "sVar:")
+  (setq inicio (point))
+  (insert (concat "echo '<pre>';\nvar_dump(" var  ");\necho '<\pre>';"))
+  (indent-region inicio (point))
+)
+
+(defun doctrine-jean-claude (var)
+  "print-a-php-var-dump"
+  (interactive "sVar:")
+  (setq inicio (point))
+  (insert (concat "echo '<pre>';\n\\Doctrine\\Common\\Util\\Debug::dump(" var  ");\necho '<\pre>';"))
+  (indent-region inicio (point))
+)
+
+(define-key sf-mode-keymap
+  (kbd "C-c C-j j")
+  'jean-claude
+)
+
+(define-key sf-mode-keymap
+  (kbd "C-c C-j d")
+  'doctrine-jean-claude
+)
+
+(setq split-height-threshold 0)
+(setq split-width-threshold 0)
