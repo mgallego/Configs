@@ -16,21 +16,23 @@
 (require 'lorem-ipsum)
 (add-to-list 'load-path "~/.emacs.modes/auto-complete")
 (require 'auto-complete-config)
-(add-to-list 'load-path "~/.emacs.modes/emacs-flymake-phpcs")
-(require 'flymake-phpcs)
+;; (add-to-list 'load-path "~/.emacs.modes/emacs-flymake-phpcs")
+;; (require 'flymake-phpcs)
 (add-to-list 'load-path "~/.emacs.modes/Fill-Column-Indicator")
 (require 'fill-column-indicator)
 (add-to-list 'load-path "~/.emacs.modes/tomatinho")
 (require 'tomatinho)
 (add-to-list 'load-path "~/.emacs.modes/geben-svn")
 (require 'geben)
-(add-to-list 'load-path "~/.emacs.modes/yasnippet")
-(require 'yasnippet)
+;;(add-to-list 'load-path "~/.emacs.modes/yasnippet")
+;;(require 'yasnippet)
 (require 'tramp)
 (add-to-list 'load-path "~/.emacs.modes/markdown-mode")
 (require 'markdown-mode)
 (load-file "~/.emacs.modes/phpdocumentor.el/phpdocumentor.el")
-
+(add-to-list 'load-path "~/.emacs.modes/phpplus-mode")
+(require 'php+-mode)
+(php+-mode-setup)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -49,7 +51,11 @@
  '(column-number-mode t)
  '(custom-enabled-themes (quote (wombat)))
  '(display-time-mode t)
+ '(font-use-system-font t)
  '(nxml-child-indent 4)
+ '(php+-mode-show-project-in-modeline t)
+ '(php-project-list (quote (("Auth" "~/Dev/Auth/" "~/Dev/TAGS_Auth" nil "~/Dev/Auth/app/phpunit.xml" nil (("" . "") "" "" "" "" "" "" "" "") "" "") ("Sandbox" "~/Dev/Sandbox/src/" "~/Dev/TAGS_Sandbox" nil "~/Dev/Sandbox/app/phpunit.xml" nil (("" . "") "" "" "" "" "" "" "" "") "" "") ("Core" "~/Dev/Core/src/" "~/Dev/TAGS_Core" nil "~/Dev/Core/app/phpunit.xml" nil (("" . "") "" "" "" "" "" "" "" "") "" "") ("Legacy" "~/Dev/Legacy/" "~/Dev/TAGS_Legacy" nil "~/Dev/Sandbox/app/phpunit.xml" nil (("" . "") "" "" "" "" "" "" "" "") "" ""))))
+ '(phpcs-standard "PSR2")
  '(show-paren-mode t)
  '(tool-bar-mode nil))
 (custom-set-faces
@@ -57,7 +63,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "DejaVu Sans Mono" :foundry "unknown" :slant normal :weight normal :height 109 :width normal)))))
+ '(default ((t (:family "Bitstream Vera Sans Mono" :foundry "bitstream" :slant normal :weight normal :height 90 :width normal)))))
 (setq display-time-24hr-format t    
       display-time-load-average nil) 
 (display-time)
@@ -79,9 +85,13 @@
 
 
 ;;KEYS
-(global-set-key[f3] 'eshell) ;;abre un buffer eshell al pulsar la tecla F3
-(global-set-key[f4] 'sql-mysql)
-(global-set-key (kbd "C-c d") 'credmp/flymake-display-err-minibuf)
+(global-set-key[f2] 'phpunit-single-test)
+(global-set-key[f3] 'phpcs)
+(global-set-key[f4] 'php-lint)
+(global-set-key[f5] 'phpmd)
+;; (global-set-key[f3] 'eshell) ;;abre un buffer eshell al pulsar la tecla F3
+;; (global-set-key[f4] 'sql-mysql)
+;;(global-set-key (kbd "C-c d") 'credmp/flymake-display-err-minibuf)
 (global-set-key (kbd "C-c n") 'my-goto-next-error)
 (global-set-key (kbd "<C-tab>") 'yas/expand)
 
@@ -99,6 +109,10 @@
     ; anything to the initial frame if it's in your .emacs, since that file is
     ; read _after_ the initial frame is created.
     (add-hook 'after-make-frame-functions 'toggle-fullscreen)
+
+(defun test-phpcs-phplint ()
+  (interactive)
+  (php-compile-run :phpcs));; t :phpcs t :phpmd t ))
 
 
 
@@ -166,35 +180,35 @@
 				  Lorem-ipsum-list-end "</ul>\n")))
 
 
-;;FLYMAKE PHP -- CODE SNIFFER
-(setq flymake-phpcs-command "~/.emacs.modes/emacs-flymake-phpcs/bin/flymake_phpcs")
-(setq flymake-phpcs-standard
-  "/usr/share/php/PHP/CodeSniffer/Standards/PSR2")
-(setq flymake-phpcs-show-rule t)
+;; ;;FLYMAKE PHP -- CODE SNIFFER
+;; (setq flymake-phpcs-command "~/.emacs.modes/emacs-flymake-phpcs/bin/flymake_phpcs")
+;; (setq flymake-phpcs-standard
+;;   "/usr/share/php/PHP/CodeSniffer/Standards/PSR2")
+;; (setq flymake-phpcs-show-rule t)
 
-(defun credmp/flymake-display-err-minibuf () 
-      "Displays the error/warning for the current line in the minibuffer"
-      (interactive)
-      (let* ((line-no             (flymake-current-line-no))
-             (line-err-info-list  (nth 0 (flymake-find-err-info flymake-err-info line-no)))
-             (count               (length line-err-info-list))
-             )
-        (while (> count 0)
-           (when line-err-info-list
-           (let* ((file       (flymake-ler-file (nth (1- count) line-err-info-list)))
-                   (full-file  (flymake-ler-full-file (nth (1- count) line-err-info-list)))
-                   (text (flymake-ler-text (nth (1- count) line-err-info-list)))
-                   (line       (flymake-ler-line (nth (1- count) line-err-info-list))))
-              (message "[%s] %s" line text)
-              )
-            )
-          (setq count (1- count)))))
+;; (defun credmp/flymake-display-err-minibuf () 
+;;       "Displays the error/warning for the current line in the minibuffer"
+;;       (interactive)
+;;       (let* ((line-no             (flymake-current-line-no))
+;;              (line-err-info-list  (nth 0 (flymake-find-err-info flymake-err-info line-no)))
+;;              (count               (length line-err-info-list))
+;;              )
+;;         (while (> count 0)
+;;            (when line-err-info-list
+;;            (let* ((file       (flymake-ler-file (nth (1- count) line-err-info-list)))
+;;                    (full-file  (flymake-ler-full-file (nth (1- count) line-err-info-list)))
+;;                    (text (flymake-ler-text (nth (1- count) line-err-info-list)))
+;;                    (line       (flymake-ler-line (nth (1- count) line-err-info-list))))
+;;               (message "[%s] %s" line text)
+;;               )
+;;             )
+;;           (setq count (1- count)))))
 
-(defun my-goto-next-error ()
-  (interactive)
-  (flymake-goto-next-error)
-  (credmp/flymake-display-err-minibuf)
-)
+;; (defun my-goto-next-error ()
+;;   (interactive)
+;;   (flymake-goto-next-error)
+;;   (credmp/flymake-display-err-minibuf)
+;; )
 
 
 ;;COLUMN WARNING
@@ -213,10 +227,10 @@
 
 
 ;;YASNIPPET
-(setq yas-snippet-dirs
-      '("~/.emacs.modes/yasnippet-php-mode"
-        ))
-(yas-global-mode 1)
+;; (setq yas-snippet-dirs
+;;       '("~/.emacs.modes/yasnippet-php-mode"
+;;         ))
+;; (yas-global-mode 1)
 
 ;;TRAMP
 (setq tramp-default-method "scp")
@@ -229,7 +243,17 @@
   "print-a-php-var-dump"
   (interactive "sVar:")
   (setq inicio (point))
-  (insert (concat "echo '<pre>';\nvar_dump(" var  ");\necho '<\pre>';"))
+  (insert (concat "echo '<br/> Jean Claude var_dump in " (file-name-base) " " (what-line) "';\n"))
+  (insert (concat "echo '<br/><pre>';\nvar_dump(" var  ");\necho '</pre>';"))
+  (indent-region inicio (point))
+)
+
+(defun jean-claude-die (var)
+  "print-a-php-var-dump"
+  (interactive "sVar:")
+  (setq inicio (point))
+  (jean-claude var)
+  (insert "\ndie;")
   (indent-region inicio (point))
 )
 
@@ -237,7 +261,17 @@
   "print-a-php-var-dump"
   (interactive "sVar:")
   (setq inicio (point))
-  (insert (concat "echo '<pre>';\n\\Doctrine\\Common\\Util\\Debug::dump(" var  ");\necho '<\pre>';"))
+  (insert (concat "echo '<br/> Doctrine Jean Claude var_dump in " (file-name-base) " " (what-line)"';\n"))
+  (insert (concat "echo '<br/><pre>';\n\\Doctrine\\Common\\Util\\Debug::dump(" var  ");\necho '</pre>';"))
+  (indent-region inicio (point))
+)
+
+(defun doctrine-jean-claude-die (var)
+  "print-a-php-var-dump"
+  (interactive "sVar:")
+  (setq inicio (point))
+  (doctrine-jean-claude var)
+  (insert "\ndie;")
   (indent-region inicio (point))
 )
 
@@ -253,3 +287,26 @@
 
 (setq split-height-threshold 0)
 (setq split-width-threshold 0)
+
+(setq locale-coding-system 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(set-selection-coding-system 'utf-8)
+(prefer-coding-system 'utf-8)
+
+(defun sacha/increase-font-size ()
+  (interactive)
+  (set-face-attribute 'default
+                      nil
+                      :height
+                      (ceiling (* 1.10
+                                  (face-attribute 'default :height)))))
+(defun sacha/decrease-font-size ()
+  (interactive)
+  (set-face-attribute 'default
+                      nil
+                      :height
+                      (floor (* 0.9
+                                  (face-attribute 'default :height)))))
+(global-set-key (kbd "C-+") 'sacha/increase-font-size)
+(global-set-key (kbd "C--") 'sacha/decrease-font-size)
