@@ -321,3 +321,8 @@
       (append '(("\\.html.twig?$" . django-html-mumamo-mode)) auto-mode-alist))
 (setq mumamo-background-colors nil) 
 (add-to-list 'auto-mode-alist '("\\.html.twig$" . django-html-mumamo-mode))
+
+;;php+-mode
+(setq auto-mode-alist
+      (append '(("\\.php?$" . php+-mode)) auto-mode-alist))
+(add-to-list 'auto-mode-alist '("\\.php$" . php+-mode))
