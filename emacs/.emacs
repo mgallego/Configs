@@ -33,7 +33,7 @@
 (add-to-list 'load-path "~/.emacs.modes/phpplus-mode")
 (require 'php+-mode)
 (php+-mode-setup)
-
+(load "~/.emacs.modes/nxhtml/autostart.el")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;  EMACS  ;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -54,7 +54,7 @@
  '(font-use-system-font t)
  '(nxml-child-indent 4)
  '(php+-mode-show-project-in-modeline t)
- '(php-project-list (quote (("Auth" "~/Dev/Auth/" "~/Dev/TAGS_Auth" nil "~/Dev/Auth/app/phpunit.xml" nil (("" . "") "" "" "" "" "" "" "" "") "" "") ("Sandbox" "~/Dev/Sandbox/src/" "~/Dev/TAGS_Sandbox" nil "~/Dev/Sandbox/app/phpunit.xml" nil (("" . "") "" "" "" "" "" "" "" "") "" "") ("Core" "~/Dev/Core/src/" "~/Dev/TAGS_Core" nil "~/Dev/Core/app/phpunit.xml" nil (("" . "") "" "" "" "" "" "" "" "") "" "") ("Legacy" "~/Dev/Legacy/" "~/Dev/TAGS_Legacy" nil "~/Dev/Sandbox/app/phpunit.xml" nil (("" . "") "" "" "" "" "" "" "" "") "" ""))))
+ '(php-project-list (quote (("Picmnt" "~/Dev/Picmnt/" "~/Dev/Picmnt_TAGS" nil "~/Dev/Picmnt/app/phpunit.xml" nil (("" . "") "" "" "" "" "" "" "" "") "" "") ("Auth" "~/Dev/Auth/" "~/Dev/TAGS_Auth" nil "~/Dev/Auth/app/phpunit.xml" nil (("" . "") "" "" "" "" "" "" "" "") "" "") ("Sandbox" "~/Dev/Sandbox/src/" "~/Dev/TAGS_Sandbox" nil "~/Dev/Sandbox/app/phpunit.xml" nil (("" . "") "" "" "" "" "" "" "" "") "" "") ("Core" "~/Dev/Core/src/" "~/Dev/TAGS_Core" nil "~/Dev/Core/app/phpunit.xml" nil (("" . "") "" "" "" "" "" "" "" "") "" "") ("Legacy" "~/Dev/Legacy/" "~/Dev/TAGS_Legacy" nil "~/Dev/Sandbox/app/phpunit.xml" nil (("" . "") "" "" "" "" "" "" "" "") "" ""))))
  '(phpcs-standard "PSR2")
  '(show-paren-mode t)
  '(tool-bar-mode nil))
@@ -63,7 +63,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "Bitstream Vera Sans Mono" :foundry "bitstream" :slant normal :weight normal :height 90 :width normal)))))
+ '(default ((t (:family "Droid Sans Mono" :foundry "unknown" :slant normal :weight normal :height 109 :width normal)))))
 (setq display-time-24hr-format t    
       display-time-load-average nil) 
 (display-time)
@@ -212,15 +212,15 @@
 
 
 ;;COLUMN WARNING
-(setq-default fci-rule-column 120)
-(setq fci-handle-truncate-lines nil)
-(add-hook 'after-change-major-mode-hook 'auto-fci-mode)
-(add-hook 'window-size-change-functions 'auto-fci-mode)
-(defun auto-fci-mode (&optional unused)
-  (if (> (frame-width) 80)
-      (fci-mode 1)
-    (fci-mode 0))
-)
+;;(setq-default fci-rule-column 120)
+;;(setq fci-handle-truncate-lines nil)
+;;(add-hook 'after-change-major-mode-hook 'auto-fci-mode)
+;;(add-hook 'window-size-change-functions 'auto-fci-mode)
+;; (defun auto-fci-mode (&optional unused)
+;;   (if (> (frame-width) 80)
+;;       (fci-mode 1)
+;;     (fci-mode 0))
+;; )
 
 ;;POMODORO
 (global-set-key (kbd "<f12>") 'tomatinho)
@@ -310,3 +310,14 @@
                                   (face-attribute 'default :height)))))
 (global-set-key (kbd "C-+") 'sacha/increase-font-size)
 (global-set-key (kbd "C--") 'sacha/decrease-font-size)
+
+;;mumamo
+(when (and (equal emacs-major-version 24)
+           (equal emacs-minor-version 2))
+  (eval-after-load "mumamo"
+    '(setq mumamo-per-buffer-local-vars
+           (delq 'buffer-file-name mumamo-per-buffer-local-vars))))
+(setq auto-mode-alist
+      (append '(("\\.html.twig?$" . django-html-mumamo-mode)) auto-mode-alist))
+(setq mumamo-background-colors nil) 
+(add-to-list 'auto-mode-alist '("\\.html.twig$" . django-html-mumamo-mode))
