@@ -54,7 +54,7 @@
  '(font-use-system-font t)
  '(nxml-child-indent 4)
  '(php+-mode-show-project-in-modeline t)
- '(php-project-list (quote (("Auth" "~/Dev/Auth/" "~/Dev/TAGS_Auth" nil "~/Dev/Auth/app/phpunit.xml" nil (("" . "") "" "" "" "" "" "" "" "") "" "") ("Sandbox" "~/Dev/Sandbox/src/" "~/Dev/TAGS_Sandbox" nil "~/Dev/Sandbox/app/phpunit.xml" nil (("" . "") "" "" "" "" "" "" "" "") "" "") ("Core" "~/Dev/Core/src/" "~/Dev/TAGS_Core" nil "~/Dev/Core/app/phpunit.xml" nil (("" . "") "" "" "" "" "" "" "" "") "" "") ("Legacy" "~/Dev/Legacy/" "~/Dev/TAGS_Legacy" nil "~/Dev/Sandbox/app/phpunit.xml" nil (("" . "") "" "" "" "" "" "" "" "") "" ""))))
+ '(php-project-list (quote (("LegacyWS" "~/Dev/Core/vendor/bodaclick/legacy-ws-bundle/Bodaclick/WS/MollBundle/" "~/Dev/TAGS_Core" ("~/Dev/Core/") "~/Dev/Core/app/phpunit.xml" nil (("" . "") "" "" "" "" "" "" "" "") "" "") ("Auth" "~/Dev/Auth/" "~/Dev/TAGS_Auth" nil "~/Dev/Auth/app/phpunit.xml" nil (("" . "") "" "" "" "" "" "" "" "") "" "") ("Sandbox" "~/Dev/Sandbox/src/" "~/Dev/TAGS_Sandbox" nil "~/Dev/Sandbox/app/phpunit.xml" nil (("" . "") "" "" "" "" "" "" "" "") "" "") ("Core" "~/Dev/Core/src/" "~/Dev/TAGS_Core" nil "~/Dev/Core/app/phpunit.xml" nil (("" . "") "" "" "" "" "" "" "" "") "" "") ("Legacy" "~/Dev/Legacy/" "~/Dev/TAGS_Legacy" nil "~/Dev/Sandbox/app/phpunit.xml" nil (("" . "") "" "" "" "" "" "" "" "") "" ""))))
  '(phpcs-standard "PSR2")
  '(show-paren-mode t)
  '(tool-bar-mode nil))
