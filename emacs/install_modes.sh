@@ -15,6 +15,7 @@ git clone https://github.com/auto-complete/popup-el.git
 git clone https://github.com/auto-complete/auto-complete.git
 git clone git://jblevins.org/git/markdown-mode.git
 git clone https://github.com/mgallego/phpdocumentor.el
+git clone git://github.com/emacsmirror/nxhtml.git
 
 cd geben-svn
 make
