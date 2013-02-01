@@ -354,6 +354,7 @@
 
 ;;hl
 (global-hl-line-mode 1)
-(set-face-background 'highlight "#1E1C2B")
+(set-face-attribute hl-line-face nil :underline nil)
+(set-face-background 'highlight "#222")
 (set-face-foreground 'highlight nil)
 (set-face-underline-p 'highlight nil)
