@@ -23,7 +23,7 @@
 (add-to-list 'load-path "~/.emacs.modes/tomatinho")
 (require 'tomatinho)
 (add-to-list 'load-path "~/.emacs.modes/geben-svn")
-(require 'geben)
+;;(require 'geben)
 ;;(add-to-list 'load-path "~/.emacs.modes/yasnippet")
 ;;(require 'yasnippet)
 (require 'tramp)
@@ -34,6 +34,7 @@
 (require 'php+-mode)
 (php+-mode-setup)
 (load "~/.emacs.modes/nxhtml/autostart.el")
+(hl-line-mode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;  EMACS  ;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -54,7 +55,7 @@
  '(font-use-system-font t)
  '(nxml-child-indent 4)
  '(php+-mode-show-project-in-modeline t)
- '(php-project-list (quote (("LegacyWS" "~/Dev/Core/vendor/bodaclick/legacy-ws-bundle/Bodaclick/WS/MollBundle/" "~/Dev/TAGS_Core" ("~/Dev/Core/") "~/Dev/Core/app/phpunit.xml" nil (("" . "") "" "" "" "" "" "" "" "") "" "") ("Auth" "~/Dev/Auth/" "~/Dev/TAGS_Auth" nil "~/Dev/Auth/app/phpunit.xml" nil (("" . "") "" "" "" "" "" "" "" "") "" "") ("Sandbox" "~/Dev/Sandbox/src/" "~/Dev/TAGS_Sandbox" nil "~/Dev/Sandbox/app/phpunit.xml" nil (("" . "") "" "" "" "" "" "" "" "") "" "") ("Core" "~/Dev/Core/src/" "~/Dev/TAGS_Core" nil "~/Dev/Core/app/phpunit.xml" nil (("" . "") "" "" "" "" "" "" "" "") "" "") ("Legacy" "~/Dev/Legacy/" "~/Dev/TAGS_Legacy" nil "~/Dev/Sandbox/app/phpunit.xml" nil (("" . "") "" "" "" "" "" "" "" "") "" ""))))
+ '(php-project-list (quote (("Portal" "~/Dev/BDKPortal/" "~/Dev/Portal" nil "~/Dev/BDKPortal/app/phpunit.xml" nil (("" . "") "" "" "" "" "" "" "" "") "" "") ("LegacyWS" "~/Dev/Core/vendor/bodaclick/legacy-ws-bundle/Bodaclick/WS/MollBundle/" "~/Dev/TAGS_Core" ("~/Dev/Core/") "~/Dev/Core/app/phpunit.xml" nil (("" . "") "" "" "" "" "" "" "" "") "" "") ("Auth" "~/Dev/Auth/" "~/Dev/TAGS_Auth" nil "~/Dev/Auth/app/phpunit.xml" nil (("" . "") "" "" "" "" "" "" "" "") "" "") ("Sandbox" "~/Dev/Sandbox/src/" "~/Dev/TAGS_Sandbox" nil "~/Dev/Sandbox/app/phpunit.xml" nil (("" . "") "" "" "" "" "" "" "" "") "" "") ("Core" "~/Dev/Core/src/" "~/Dev/TAGS_Core" nil "~/Dev/Core/app/phpunit.xml" nil (("" . "") "" "" "" "" "" "" "" "") "" "") ("Legacy" "~/Dev/Core/vendor/bodaclick/legacy-bundle/BDK/LegacyBundle/" "~/Dev/TAGS_Core" nil "~/Dev/Core/app/phpunit.xml" nil (("" . "") "" "" "" "" "" "" "" "") "" ""))))
  '(phpcs-standard "PSR2")
  '(show-paren-mode t)
  '(tool-bar-mode nil))
@@ -63,7 +64,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "Droid Sans Mono" :foundry "unknown" :slant normal :weight normal :height 109 :width normal)))))
+ '(default ((t (:family "Liberation Mono" :foundry "unknown" :slant normal :weight normal :height 90 :width normal)))))
 (setq display-time-24hr-format t    
       display-time-load-average nil) 
 (display-time)
@@ -93,6 +94,7 @@
 ;; (global-set-key[f4] 'sql-mysql)
 ;;(global-set-key (kbd "C-c d") 'credmp/flymake-display-err-minibuf)
 (global-set-key (kbd "C-c n") 'my-goto-next-error)
+(global-set-key (kbd "M-p") 'php-project-open)
 (global-set-key (kbd "<C-tab>") 'yas/expand)
 
 
@@ -212,15 +214,15 @@
 
 
 ;;COLUMN WARNING
-;;(setq-default fci-rule-column 120)
-;;(setq fci-handle-truncate-lines nil)
-;;(add-hook 'after-change-major-mode-hook 'auto-fci-mode)
-;;(add-hook 'window-size-change-functions 'auto-fci-mode)
-;; (defun auto-fci-mode (&optional unused)
-;;   (if (> (frame-width) 80)
-;;       (fci-mode 1)
-;;     (fci-mode 0))
-;; )
+(setq-default fci-rule-column 120)
+(setq fci-handle-truncate-lines nil)
+(add-hook 'after-change-major-mode-hook 'auto-fci-mode)
+(add-hook 'window-size-change-functions 'auto-fci-mode)
+(defun auto-fci-mode (&optional unused)
+  (if (> (frame-width) 80)
+      (fci-mode 1)
+    (fci-mode 0))
+)
 
 ;;POMODORO
 (global-set-key (kbd "<f12>") 'tomatinho)
@@ -322,7 +324,33 @@
 (setq mumamo-background-colors nil) 
 (add-to-list 'auto-mode-alist '("\\.html.twig$" . django-html-mumamo-mode))
 
+
+(setq c-basic-offset 4) ; 2 tabs indenting
+(setq indent-tabs-mode nil)
+(add-hook 'django-html-mumamo-mode-hook
+	  (lambda ()
+	    (setq indent-tabs-mode t)
+	    (setq tab-width 4)
+	    (setq c-basic-indent 4)))
+
+(add-hook 'html-mode-hook
+	  (lambda ()
+	    (setq indent-tabs-mode t)
+	    (setq tab-width 4)
+	    (setq c-basic-indent 4)))
+
+
 ;;php+-mode
 (setq auto-mode-alist
       (append '(("\\.php?$" . php+-mode)) auto-mode-alist))
 (add-to-list 'auto-mode-alist '("\\.php$" . php+-mode))
+
+
+(defun clean-whitespaces ()
+  "print-a-php-var-dump"
+  (interactive)
+  (replace-regexp  "[ ]+^J" "^J")
+)
+
+
+
