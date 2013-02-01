@@ -34,7 +34,7 @@
 (require 'php+-mode)
 (php+-mode-setup)
 (load "~/.emacs.modes/nxhtml/autostart.el")
-(hl-line-mode)
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;  EMACS  ;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -352,5 +352,8 @@
   (replace-regexp  "[ ]+^J" "^J")
 )
 
-
-
+;;hl
+(global-hl-line-mode 1)
+(set-face-background 'highlight "#1E1C2B")
+(set-face-foreground 'highlight nil)
+(set-face-underline-p 'highlight nil)
