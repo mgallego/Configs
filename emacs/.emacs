@@ -23,7 +23,7 @@
 (add-to-list 'load-path "~/.emacs.modes/tomatinho")
 (require 'tomatinho)
 (add-to-list 'load-path "~/.emacs.modes/geben-svn")
-(require 'geben)
+;;(require 'geben)
 ;;(add-to-list 'load-path "~/.emacs.modes/yasnippet")
 ;;(require 'yasnippet)
 (require 'tramp)
@@ -36,6 +36,7 @@
 (load "~/.emacs.modes/nxhtml/autostart.el")
 (add-to-list 'load-path "~/.emacs.modes/twig-mode")
 (require 'twig)
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;  EMACS  ;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -65,7 +66,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "Droid Sans Mono" :foundry "unknown" :slant normal :weight normal :height 109 :width normal)))))
+ '(default ((t (:family "Liberation Mono" :foundry "unknown" :slant normal :weight normal :height 90 :width normal)))))
 (setq display-time-24hr-format t    
       display-time-load-average nil) 
 (display-time)
@@ -95,6 +96,7 @@
 ;; (global-set-key[f4] 'sql-mysql)
 ;;(global-set-key (kbd "C-c d") 'credmp/flymake-display-err-minibuf)
 (global-set-key (kbd "C-c n") 'my-goto-next-error)
+(global-set-key (kbd "M-p") 'php-project-open)
 (global-set-key (kbd "<C-tab>") 'yas/expand)
 
 
@@ -214,15 +216,15 @@
 
 
 ;;COLUMN WARNING
-;;(setq-default fci-rule-column 120)
-;;(setq fci-handle-truncate-lines nil)
-;;(add-hook 'after-change-major-mode-hook 'auto-fci-mode)
-;;(add-hook 'window-size-change-functions 'auto-fci-mode)
-;; (defun auto-fci-mode (&optional unused)
-;;   (if (> (frame-width) 80)
-;;       (fci-mode 1)
-;;     (fci-mode 0))
-;; )
+(setq-default fci-rule-column 120)
+(setq fci-handle-truncate-lines nil)
+(add-hook 'after-change-major-mode-hook 'auto-fci-mode)
+(add-hook 'window-size-change-functions 'auto-fci-mode)
+(defun auto-fci-mode (&optional unused)
+  (if (> (frame-width) 80)
+      (fci-mode 1)
+    (fci-mode 0))
+)
 
 ;;POMODORO
 (global-set-key (kbd "<f12>") 'tomatinho)
@@ -323,6 +325,22 @@
       (append '(("\\.html.twig?$" . django-html-mumamo-mode)) auto-mode-alist))
 (setq mumamo-background-colors nil) 
 (add-to-list 'auto-mode-alist '("\\.html.twig$" . django-html-mumamo-mode))
+
+
+(setq c-basic-offset 4) ; 2 tabs indenting
+(setq indent-tabs-mode nil)
+(add-hook 'django-html-mumamo-mode-hook
+	  (lambda ()
+	    (setq indent-tabs-mode t)
+	    (setq tab-width 4)
+	    (setq c-basic-indent 4)))
+
+(add-hook 'html-mode-hook
+	  (lambda ()
+	    (setq indent-tabs-mode t)
+	    (setq tab-width 4)
+	    (setq c-basic-indent 4)))
+
 
 ;;php+-mode
 (setq auto-mode-alist
