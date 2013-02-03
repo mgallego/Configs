@@ -34,6 +34,8 @@
 (require 'php+-mode)
 (php+-mode-setup)
 (load "~/.emacs.modes/nxhtml/autostart.el")
+(add-to-list 'load-path "~/.emacs.modes/twig-mode")
+(require 'twig)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;  EMACS  ;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -54,7 +56,7 @@
  '(font-use-system-font t)
  '(nxml-child-indent 4)
  '(php+-mode-show-project-in-modeline t)
- '(php-project-list (quote (("Picmnt" "~/Dev/Picmnt/" "~/Dev/Picmnt_TAGS" nil "~/Dev/Picmnt/app/phpunit.xml" nil (("" . "") "" "" "" "" "" "" "" "") "" "") ("Auth" "~/Dev/Auth/" "~/Dev/TAGS_Auth" nil "~/Dev/Auth/app/phpunit.xml" nil (("" . "") "" "" "" "" "" "" "" "") "" "") ("Sandbox" "~/Dev/Sandbox/src/" "~/Dev/TAGS_Sandbox" nil "~/Dev/Sandbox/app/phpunit.xml" nil (("" . "") "" "" "" "" "" "" "" "") "" "") ("Core" "~/Dev/Core/src/" "~/Dev/TAGS_Core" nil "~/Dev/Core/app/phpunit.xml" nil (("" . "") "" "" "" "" "" "" "" "") "" "") ("Legacy" "~/Dev/Legacy/" "~/Dev/TAGS_Legacy" nil "~/Dev/Sandbox/app/phpunit.xml" nil (("" . "") "" "" "" "" "" "" "" "") "" ""))))
+ '(php-project-list (quote (("dev.picmnt" "/moises@dev.picmnt.com:/home/moises/Dev/Picmnt/src/SFM/PicmntBundle/" "/moises@dev.picmnt.com:/home/moises/Dev/picmnt_tags" nil "" nil (("" . "") "" "" "" "" "" "" "" "") "" "") ("dev.picmnt" "/moises@dev.picmnt.com:/home/moises/Dev/Picmnt" "/moises@dev.picmnt.com:/home/moises/Dev/picmnt_TAGS" nil "" nil (("" . "") "" "" "" "" "" "" "" "") "" "") ("Picmnt" "~/Dev/Picmnt/" "~/Dev/Picmnt_TAGS" nil "~/Dev/Picmnt/app/phpunit.xml" nil (("" . "") "" "" "" "" "" "" "" "") "" "") ("Auth" "~/Dev/Auth/" "~/Dev/TAGS_Auth" nil "~/Dev/Auth/app/phpunit.xml" nil (("" . "") "" "" "" "" "" "" "" "") "" "") ("Sandbox" "~/Dev/Sandbox/src/" "~/Dev/TAGS_Sandbox" nil "~/Dev/Sandbox/app/phpunit.xml" nil (("" . "") "" "" "" "" "" "" "" "") "" "") ("Core" "~/Dev/Core/src/" "~/Dev/TAGS_Core" nil "~/Dev/Core/app/phpunit.xml" nil (("" . "") "" "" "" "" "" "" "" "") "" "") ("Legacy" "~/Dev/Legacy/" "~/Dev/TAGS_Legacy" nil "~/Dev/Sandbox/app/phpunit.xml" nil (("" . "") "" "" "" "" "" "" "" "") "" ""))))
  '(phpcs-standard "PSR2")
  '(show-paren-mode t)
  '(tool-bar-mode nil))
@@ -326,3 +328,12 @@
 (setq auto-mode-alist
       (append '(("\\.php?$" . php+-mode)) auto-mode-alist))
 (add-to-list 'auto-mode-alist '("\\.php$" . php+-mode))
+
+;;twig-minor-mode
+;;  (setq auto-mode-alist
+;;        (append '(("\\.twig?$" . twig-minor-mode)) auto-mode-alist))
+;; (add-to-list 'auto-mode-alist '("\\.twig$" . twig-minor-mode))
+
+(setq auto-mode-alist
+      (append '(("\\.less?$" . css-mode)) auto-mode-alist))
+(add-to-list 'auto-mode-alist '("\\.less$" . css-mode))
