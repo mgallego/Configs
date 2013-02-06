@@ -16,6 +16,9 @@ git clone https://github.com/auto-complete/auto-complete.git
 git clone git://jblevins.org/git/markdown-mode.git
 git clone https://github.com/mgallego/phpdocumentor.el
 git clone git://github.com/emacsmirror/nxhtml.git
+git clone git://github.com/baohaojun/org-jira.git
+hg clone https://code.google.com/p/emacs-soap-client/
+
 
 cd geben-svn
 make

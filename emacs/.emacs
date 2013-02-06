@@ -23,7 +23,7 @@
 (add-to-list 'load-path "~/.emacs.modes/tomatinho")
 (require 'tomatinho)
 (add-to-list 'load-path "~/.emacs.modes/geben-svn")
-;;(require 'geben)
+(require 'geben)
 ;;(add-to-list 'load-path "~/.emacs.modes/yasnippet")
 ;;(require 'yasnippet)
 (require 'tramp)
@@ -34,6 +34,13 @@
 (require 'php+-mode)
 (php+-mode-setup)
 (load "~/.emacs.modes/nxhtml/autostart.el")
+(add-to-list 'load-path "~/.emacs.modes/org-jira")
+(setq jiralib-url "https://picmnt.atlassian.net/")
+(require 'org-jira)
+(add-to-list 'load-path "~/.emacs.modes/emacs-soap-client")
+(require 'soap-client)
+
+
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -358,3 +365,5 @@
 (set-face-background 'highlight "#222")
 (set-face-foreground 'highlight nil)
 (set-face-underline-p 'highlight nil)
+
+
