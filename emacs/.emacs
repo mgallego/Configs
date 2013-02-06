@@ -36,6 +36,12 @@
 (load "~/.emacs.modes/nxhtml/autostart.el")
 (add-to-list 'load-path "~/.emacs.modes/twig-mode")
 (require 'twig)
+(add-to-list 'load-path "~/.emacs.modes/org-jira")
+(setq jiralib-url "https://picmnt.atlassian.net/")
+(require 'org-jira)
+(add-to-list 'load-path "~/.emacs.modes/emacs-soap-client")
+(require 'soap-client)
+
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -355,3 +361,7 @@
 (setq auto-mode-alist
       (append '(("\\.less?$" . css-mode)) auto-mode-alist))
 (add-to-list 'auto-mode-alist '("\\.less$" . css-mode))
+
+
+;;Jira-mode
+
