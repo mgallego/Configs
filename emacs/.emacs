@@ -34,13 +34,13 @@
 (require 'php+-mode)
 (php+-mode-setup)
 (load "~/.emacs.modes/nxhtml/autostart.el")
+(add-to-list 'load-path "~/.emacs.modes/twig-mode")
+(require 'twig)
 (add-to-list 'load-path "~/.emacs.modes/org-jira")
 (setq jiralib-url "https://picmnt.atlassian.net/")
 (require 'org-jira)
 (add-to-list 'load-path "~/.emacs.modes/emacs-soap-client")
 (require 'soap-client)
-
-
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -62,7 +62,7 @@
  '(font-use-system-font t)
  '(nxml-child-indent 4)
  '(php+-mode-show-project-in-modeline t)
- '(php-project-list (quote (("Portal" "~/Dev/BDKPortal/" "~/Dev/Portal" nil "~/Dev/BDKPortal/app/phpunit.xml" nil (("" . "") "" "" "" "" "" "" "" "") "" "") ("LegacyWS" "~/Dev/Core/vendor/bodaclick/legacy-ws-bundle/Bodaclick/WS/MollBundle/" "~/Dev/TAGS_Core" ("~/Dev/Core/") "~/Dev/Core/app/phpunit.xml" nil (("" . "") "" "" "" "" "" "" "" "") "" "") ("Auth" "~/Dev/Auth/" "~/Dev/TAGS_Auth" nil "~/Dev/Auth/app/phpunit.xml" nil (("" . "") "" "" "" "" "" "" "" "") "" "") ("Sandbox" "~/Dev/Sandbox/src/" "~/Dev/TAGS_Sandbox" nil "~/Dev/Sandbox/app/phpunit.xml" nil (("" . "") "" "" "" "" "" "" "" "") "" "") ("Core" "~/Dev/Core/src/" "~/Dev/TAGS_Core" nil "~/Dev/Core/app/phpunit.xml" nil (("" . "") "" "" "" "" "" "" "" "") "" "") ("Legacy" "~/Dev/Core/vendor/bodaclick/legacy-bundle/BDK/LegacyBundle/" "~/Dev/TAGS_Core" nil "~/Dev/Core/app/phpunit.xml" nil (("" . "") "" "" "" "" "" "" "" "") "" ""))))
+ '(php-project-list (quote (("dev.picmnt" "/moises@dev.picmnt.com:/home/moises/Dev/Picmnt/src/SFM/PicmntBundle/" "/moises@dev.picmnt.com:/home/moises/Dev/picmnt_tags" nil "" nil (("" . "") "" "" "" "" "" "" "" "") "" "") ("dev.picmnt" "/moises@dev.picmnt.com:/home/moises/Dev/Picmnt" "/moises@dev.picmnt.com:/home/moises/Dev/picmnt_TAGS" nil "" nil (("" . "") "" "" "" "" "" "" "" "") "" "") ("Picmnt" "~/Dev/Picmnt/" "~/Dev/Picmnt_TAGS" nil "~/Dev/Picmnt/app/phpunit.xml" nil (("" . "") "" "" "" "" "" "" "" "") "" "") ("Auth" "~/Dev/Auth/" "~/Dev/TAGS_Auth" nil "~/Dev/Auth/app/phpunit.xml" nil (("" . "") "" "" "" "" "" "" "" "") "" "") ("Sandbox" "~/Dev/Sandbox/src/" "~/Dev/TAGS_Sandbox" nil "~/Dev/Sandbox/app/phpunit.xml" nil (("" . "") "" "" "" "" "" "" "" "") "" "") ("Core" "~/Dev/Core/src/" "~/Dev/TAGS_Core" nil "~/Dev/Core/app/phpunit.xml" nil (("" . "") "" "" "" "" "" "" "" "") "" "") ("Legacy" "~/Dev/Legacy/" "~/Dev/TAGS_Legacy" nil "~/Dev/Sandbox/app/phpunit.xml" nil (("" . "") "" "" "" "" "" "" "" "") "" ""))))
  '(phpcs-standard "PSR2")
  '(show-paren-mode t)
  '(tool-bar-mode nil))
@@ -352,12 +352,17 @@
       (append '(("\\.php?$" . php+-mode)) auto-mode-alist))
 (add-to-list 'auto-mode-alist '("\\.php$" . php+-mode))
 
+;;twig-minor-mode
+;;  (setq auto-mode-alist
+;;        (append '(("\\.twig?$" . twig-minor-mode)) auto-mode-alist))
+;; (add-to-list 'auto-mode-alist '("\\.twig$" . twig-minor-mode))
 
-(defun clean-whitespaces ()
-  "print-a-php-var-dump"
-  (interactive)
-  (replace-regexp  "[ ]+^J" "^J")
-)
+(setq auto-mode-alist
+      (append '(("\\.less?$" . css-mode)) auto-mode-alist))
+(add-to-list 'auto-mode-alist '("\\.less$" . css-mode))
+
+
+;;Jira-mode
 
 ;;hl
 (global-hl-line-mode 1)
