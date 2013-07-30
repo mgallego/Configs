@@ -34,8 +34,8 @@
 (require 'php+-mode)
 (php+-mode-setup)
 (load "~/.emacs.modes/nxhtml/autostart.el")
-(add-to-list 'load-path "~/.emacs.modes/twig-mode")
-(require 'twig)
+;;(add-to-list 'load-path "~/.emacs.modes/twig-mode")
+;;(require 'twig)
 (add-to-list 'load-path "~/.emacs.modes/org-jira")
 (setq jiralib-url "https://picmnt.atlassian.net/")
 (require 'org-jira)
@@ -284,6 +284,24 @@
   (indent-region inicio (point))
 )
 
+(defun ld (var)
+  "print-a-ld-var-dump"
+  (interactive "sVar:")
+  (setq inicio (point))
+  (insert (concat "echo 'Ladybug Dump (ld) in " (file-name-base) " " (what-line) "';\n"))
+  (insert (concat "ld(" var  ");\n"))
+  (indent-region inicio (point))
+)
+
+(defun ldd (var)
+  "print-a-ldd-var-dump"
+  (interactive "sVar:")
+  (setq inicio (point))
+  (insert (concat "echo 'Ladybug Dump Die (ldd) in " (file-name-base) " " (what-line) "';\n"))
+  (insert (concat "ldd(" var  ");\n"))
+  (indent-region inicio (point))
+)
+
 (define-key sf-mode-keymap
   (kbd "C-c C-j j")
   'jean-claude
@@ -320,25 +338,25 @@
 (global-set-key (kbd "C-+") 'sacha/increase-font-size)
 (global-set-key (kbd "C--") 'sacha/decrease-font-size)
 
-;;mumamo
-(when (and (equal emacs-major-version 24)
-           (equal emacs-minor-version 2))
-  (eval-after-load "mumamo"
-    '(setq mumamo-per-buffer-local-vars
-           (delq 'buffer-file-name mumamo-per-buffer-local-vars))))
-(setq auto-mode-alist
-      (append '(("\\.html.twig?$" . django-html-mumamo-mode)) auto-mode-alist))
-(setq mumamo-background-colors nil) 
-(add-to-list 'auto-mode-alist '("\\.html.twig$" . django-html-mumamo-mode))
+;; ;;mumamo
+;; (when (and (equal emacs-major-version 24)
+;;            (equal emacs-minor-version 2))
+;;   (eval-after-load "mumamo"
+;;     '(setq mumamo-per-buffer-local-vars
+;;            (delq 'buffer-file-name mumamo-per-buffer-local-vars))))
+;; (setq auto-mode-alist
+;;       (append '(("\\.html.twig?$" . django-html-mumamo-mode)) auto-mode-alist))
+;; (setq mumamo-background-colors nil) 
+;; (add-to-list 'auto-mode-alist '("\\.html.twig$" . django-html-mumamo-mode))
 
 
 (setq c-basic-offset 4) ; 2 tabs indenting
 (setq indent-tabs-mode nil)
-(add-hook 'django-html-mumamo-mode-hook
-	  (lambda ()
-	    (setq indent-tabs-mode t)
-	    (setq tab-width 4)
-	    (setq c-basic-indent 4)))
+;; (add-hook 'django-html-mumamo-mode-hook
+;; 	  (lambda ()
+;; 	    (setq indent-tabs-mode t)
+;; 	    (setq tab-width 4)
+;; 	    (setq c-basic-indent 4)))
 
 (add-hook 'html-mode-hook
 	  (lambda ()
