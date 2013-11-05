@@ -41,6 +41,9 @@
 (require 'org-jira)
 (add-to-list 'load-path "~/.emacs.modes/emacs-soap-client")
 (require 'soap-client)
+(add-to-list 'load-path "~/.emacs.modes/jinja2-mode")
+(require 'jinja2-mode)
+
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -390,3 +393,14 @@
 (set-face-underline-p 'highlight nil)
 
 
+;; Workaround the annoying warnings:
+;;    Warning (mumamo-per-buffer-local-vars):
+;;    Already 'permanent-local t: buffer-file-name
+(when (and (equal emacs-major-version 24)
+           (equal emacs-minor-version 3))
+  (eval-after-load "mumamo"
+    '(setq mumamo-per-buffer-local-vars
+           (delq 'buffer-file-name mumamo-per-buffer-local-vars))))
+;;twig
+(setq auto-mode-alist
+      (append '(("\\.html.twig?$" . jinja2-mode)) auto-mode-alist))
