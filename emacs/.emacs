@@ -404,3 +404,6 @@
 ;;twig
 (setq auto-mode-alist
       (append '(("\\.html.twig?$" . jinja2-mode)) auto-mode-alist))
+
+(setq auto-mode-alist
+      (append '(("\\.html?$" . jinja2-mode)) auto-mode-alist))
