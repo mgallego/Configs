@@ -61,7 +61,7 @@
 (when (not package-archive-contents)
   (package-refresh-contents))
 (defvar mgallego/packages
-  '(ac-js2 js2-mode yasnippet paredit flycheck web-beautify))
+  '(ac-js2 js2-mode yasnippet paredit flycheck web-beautify js2-refactor))
 (dolist (p mgallego/packages)
   (when (not (package-installed-p p))
     (package-install p)))
@@ -457,11 +457,14 @@
        '((lambda (endp delimiter) nil)))
   (paredit-mode 1))
 (add-hook 'js2-mode-hook 'my-paredit-nonlisp) ;use with the above function
-(define-key js2-mode-map "{" 'paredit-open-curly)
-(define-key js2-mode-map "}" 'paredit-close-curly-and-newline)
 ;;npm install -g jshint
 (require 'flycheck)
 (add-hook 'js2-mode-hook
           (lambda () (flycheck-mode t)))
 ;;npm install -g js-beatufiy
 (require 'web-beautify)
+(require 'js2-refactor)
+(js2r-add-keybindings-with-prefix "C-c C-m")
+(define-key js2-mode-map "{" 'paredit-open-curly)
+(define-key js2-mode-map "}" 'paredit-close-curly-and-newline)
+
