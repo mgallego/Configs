@@ -1,4 +1,4 @@
-;;PATHS
+
 (setq load-path (cons "~/.emacs.d" load-path))
 (add-to-list 'load-path "~/.emacs.modes")
 (add-to-list 'load-path "~/.emacs.modes/popup-el")
@@ -12,8 +12,8 @@
 (require 'eproject)
 (add-to-list 'load-path "~/.emacs.modes/sf.el")
 (require 'sf)
-(add-to-list 'load-path "~/.emacs.modes/lorem-ipsum")
-(require 'lorem-ipsum)
+;; (add-to-list 'load-path "~/.emacs.modes/lorem-ipsum")
+;; (require 'lorem-ipsum)
 (add-to-list 'load-path "~/.emacs.modes/auto-complete")
 (require 'auto-complete-config)
 ;; (add-to-list 'load-path "~/.emacs.modes/emacs-flymake-phpcs")
@@ -22,8 +22,8 @@
 (require 'fill-column-indicator)
 (add-to-list 'load-path "~/.emacs.modes/tomatinho")
 (require 'tomatinho)
-(add-to-list 'load-path "~/.emacs.modes/geben-svn")
-(require 'geben)
+;; (add-to-list 'load-path "~/.emacs.modes/geben-svn")
+;; (require 'geben)
 ;;(add-to-list 'load-path "~/.emacs.modes/yasnippet")
 ;;(require 'yasnippet)
 (require 'tramp)
@@ -33,17 +33,38 @@
 (add-to-list 'load-path "~/.emacs.modes/phpplus-mode")
 (require 'php+-mode)
 (php+-mode-setup)
-(load "~/.emacs.modes/nxhtml/autostart.el")
+;; (load "~/.emacs.modes/nxhtml/autostart.el")
 ;;(add-to-list 'load-path "~/.emacs.modes/twig-mode")
 ;;(require 'twig)
-(add-to-list 'load-path "~/.emacs.modes/org-jira")
-(setq jiralib-url "https://picmnt.atlassian.net/")
-(require 'org-jira)
-(add-to-list 'load-path "~/.emacs.modes/emacs-soap-client")
-(require 'soap-client)
+;; (add-to-list 'load-path "~/.emacs.modes/org-jira")
+;; (setq jiralib-url "https://picmnt.atlassian.net/")
+;; (require 'org-jira)
+;; (add-to-list 'load-path "~/.emacs.modes/emacs-soap-client")
+;; (require 'soap-client)
 (add-to-list 'load-path "~/.emacs.modes/jinja2-mode")
 (require 'jinja2-mode)
 
+;;; Emacs is not a package manager, and here we load its package manager!
+(require 'package)
+(dolist (source '(("marmalade" . "http://marmalade-repo.org/packages/")
+                  ("elpa" . "http://tromey.com/elpa/")
+                  ;; TODO: Maybe, use this after emacs24 is released
+                  ;; (development versions of packages)
+                  ("melpa" . "http://melpa.milkbox.net/packages/")
+                  ))
+  (add-to-list 'package-archives source t))
+(package-initialize)
+
+;;; Required packages
+;;; everytime emacs starts, it will automatically check if those packages are
+;;; missing, it will install them automatically
+(when (not package-archive-contents)
+  (package-refresh-contents))
+(defvar mgallego/packages
+  '(ac-js2 js2-mode))
+(dolist (p mgallego/packages)
+  (when (not (package-installed-p p))
+    (package-install p)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -177,10 +198,23 @@
 (setq org-log-done t)
 
 
+;;; yasnippet
+;;; should be loaded before auto complete so that they can work together
+(require 'yasnippet)
+;; (setq yas-snippet-dirs
+;;       '("~/.emacs.modes/yasnippet"
+;;         ))
+(yas-global-mode 1)
+
 ;;AUTOCOMPLETE
+(require 'auto-complete-config)
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
 (ac-config-default)
-
+;;; set the trigger key so that it can work together with yasnippet on tab key,
+;;; if the word exists in yasnippet, pressing tab will cause yasnippet to
+;;; activate, otherwise, auto-complete will
+(ac-set-trigger-key "TAB")
+(ac-set-trigger-key "<tab>")
 
 ;;LOREM IPSUM
 (add-hook 'sgml-mode-hook (lambda ()
@@ -407,3 +441,14 @@
 
 (setq auto-mode-alist
       (append '(("\\.html?$" . jinja2-mode)) auto-mode-alist))
+
+
+
+;;JAVASCRIPT CONFIGURATION
+(add-to-list 'auto-mode-alist '("\\.json$" . js-mode))
+(add-hook 'js-mode-hook 'js2-minor-mode)
+(add-hook 'js2-mode-hook 'ac-js2-mode)
+(setq js2-highlight-level 3)
+(add-to-list 'auto-mode-alist '("\\.js$" . ac-js2-mode))
+
+
