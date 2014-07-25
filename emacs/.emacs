@@ -61,7 +61,7 @@
 (when (not package-archive-contents)
   (package-refresh-contents))
 (defvar mgallego/packages
-  '(ac-js2 js2-mode yasnippet paredit))
+  '(ac-js2 js2-mode yasnippet paredit flycheck web-beautify))
 (dolist (p mgallego/packages)
   (when (not (package-installed-p p))
     (package-install p)))
@@ -443,13 +443,13 @@
       (append '(("\\.html?$" . jinja2-mode)) auto-mode-alist))
 
 
-
-;;JAVASCRIPT CONFIGURATION
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;JS;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;JAVASCRIPT CONFIGURATION (http://truongtx.me/2014/02/23/set-up-javascript-development-environment-in-emacs/)
 (add-to-list 'auto-mode-alist '("\\.json$" . js-mode))
 (add-hook 'js-mode-hook 'js2-minor-mode)
 (add-hook 'js2-mode-hook 'ac-js2-mode)
 (setq js2-highlight-level 3)
-(add-to-list 'auto-mode-alist '("\\.js$" . ac-js2-mode))
+(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 (defun my-paredit-nonlisp ()
   "Turn on paredit mode for non-lisps."
   (interactive)
@@ -459,3 +459,9 @@
 (add-hook 'js2-mode-hook 'my-paredit-nonlisp) ;use with the above function
 (define-key js2-mode-map "{" 'paredit-open-curly)
 (define-key js2-mode-map "}" 'paredit-close-curly-and-newline)
+;;npm install -g jshint
+(require 'flycheck)
+(add-hook 'js2-mode-hook
+          (lambda () (flycheck-mode t)))
+;;npm install -g js-beatufiy
+(require 'web-beautify)
