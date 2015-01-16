@@ -1,5 +1,5 @@
 
-(setq load-path (cons "~/.emacs.d" load-path))
+;;(setq load-path (cons "~/.emacs.d" load-path))
 (add-to-list 'load-path "~/.emacs.modes")
 (add-to-list 'load-path "~/.emacs.modes/popup-el")
 
@@ -61,7 +61,7 @@
 (when (not package-archive-contents)
   (package-refresh-contents))
 (defvar mgallego/packages
-  '(ac-js2 js2-mode yasnippet paredit flycheck web-beautify js2-refactor))
+  '(ac-js2 js2-mode yasnippet paredit flycheck web-beautify js2-refactor highlight-chars))
 (dolist (p mgallego/packages)
   (when (not (package-installed-p p))
     (package-install p)))
@@ -468,3 +468,29 @@
 (define-key js2-mode-map "{" 'paredit-open-curly)
 (define-key js2-mode-map "}" 'paredit-close-curly-and-newline)
 
+ (when (eq system-type 'darwin)
+
+      ;; default Latin font (e.g. Consolas)
+      (set-face-attribute 'default nil :family "Consolas")
+
+      ;; default font size (point * 10)
+      ;;
+      ;; WARNING!  Depending on the default font,
+      ;; if the size is not supported very well, the frame will be clipped
+      ;; so that the beginning of the buffer may not be visible correctly. 
+      (set-face-attribute 'default nil :height 165)
+
+      ;; use specific font for Korean charset.
+      ;; if you want to use different font size for specific charset,
+      ;; add :size POINT-SIZE in the font-spec.
+      (set-fontset-font t 'hangul (font-spec :name "NanumGothicCoding"))
+
+      ;; you may want to add different for other charset in this way.
+      )
+(when (eq system-type 'darwin)
+  (setq mac-right-option-modifier 'none))
+;; (setq mac-option-modifier nil
+;;       mac-command-modifier 'meta
+;;       x-select-enable-clipboard t)
+
+(hc-toggle-highlight-trailing-whitespace t)
