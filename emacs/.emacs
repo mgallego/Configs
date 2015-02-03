@@ -43,6 +43,7 @@
 ;; (require 'soap-client)
 (add-to-list 'load-path "~/.emacs.modes/jinja2-mode")
 (require 'jinja2-mode)
+;;(require 'flymake-jslint)
 
 ;;; Emacs is not a package manager, and here we load its package manager!
 (require 'package)
@@ -61,7 +62,7 @@
 (when (not package-archive-contents)
   (package-refresh-contents))
 (defvar mgallego/packages
-  '(ac-js2 js2-mode yasnippet paredit flycheck web-beautify js2-refactor highlight-chars))
+  '(ac-js2 js2-mode yasnippet paredit flycheck web-beautify js2-refactor highlight-chars flymake-easy flymake-jslint))
 (dolist (p mgallego/packages)
   (when (not (package-installed-p p))
     (package-install p)))
@@ -467,30 +468,21 @@
 (js2r-add-keybindings-with-prefix "C-c C-m")
 (define-key js2-mode-map "{" 'paredit-open-curly)
 (define-key js2-mode-map "}" 'paredit-close-curly-and-newline)
+(add-hook 'js2-mode-hook 'flymake-jslint-load)
+(setq flymake-jslint-command "/usr/local/bin/jslint")
 
- (when (eq system-type 'darwin)
-
-      ;; default Latin font (e.g. Consolas)
-      (set-face-attribute 'default nil :family "Consolas")
-
-      ;; default font size (point * 10)
-      ;;
-      ;; WARNING!  Depending on the default font,
-      ;; if the size is not supported very well, the frame will be clipped
-      ;; so that the beginning of the buffer may not be visible correctly. 
-      (set-face-attribute 'default nil :height 165)
-
-      ;; use specific font for Korean charset.
-      ;; if you want to use different font size for specific charset,
-      ;; add :size POINT-SIZE in the font-spec.
-      (set-fontset-font t 'hangul (font-spec :name "NanumGothicCoding"))
-
-      ;; you may want to add different for other charset in this way.
-      )
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;MAC OX;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (when (eq system-type 'darwin)
-  (setq mac-right-option-modifier 'none))
-;; (setq mac-option-modifier nil
-;;       mac-command-modifier 'meta
-;;       x-select-enable-clipboard t)
+  ;;A mono font family
+  (set-face-attribute 'default nil :family "Menlo")
+  (set-face-attribute 'default nil :height 130)
+  ;;Fix Alt+Gr key
+  (setq mac-right-option-modifier 'none)
+  ;;Line-height
+  (setq-default line-spacing 2)
+  ;;Home and End keys
+  (define-key global-map [home] 'beginning-of-line)
+  (define-key global-map [end] 'end-of-line)
+  )
 
 (hc-toggle-highlight-trailing-whitespace t)
