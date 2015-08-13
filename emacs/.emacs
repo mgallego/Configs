@@ -62,11 +62,14 @@
 (when (not package-archive-contents)
   (package-refresh-contents))
 (defvar mgallego/packages
-  '(ac-js2 js2-mode yasnippet paredit flycheck web-beautify js2-refactor highlight-chars flymake-easy flymake-jslint))
+  '(ac-js2 js2-mode yasnippet paredit flycheck web-beautify js2-refactor highlight-chars flymake-easy flymake-jslint feature-mode restclient find-file-in-project neotree ))
 (dolist (p mgallego/packages)
   (when (not (package-installed-p p))
     (package-install p)))
 
+(require 'restclient)
+(require 'neotree)
+(require 'find-file-in-project)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;  EMACS  ;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -86,11 +89,16 @@
  '(display-time-mode t)
  '(font-use-system-font t)
  '(nxml-child-indent 4)
+ '(package-selected-packages
+   (quote
+    (find-file-in-project neotree restclient web-beautify paredit js2-refactor highlight-chars flymake-jslint flycheck feature-mode ac-js2)))
  '(php+-mode-show-project-in-modeline t)
- '(php-project-list (quote (("dev.picmnt" "/moises@dev.picmnt.com:/home/moises/Dev/Picmnt/src/SFM/PicmntBundle/" "/moises@dev.picmnt.com:/home/moises/Dev/picmnt_tags" nil "" nil (("" . "") "" "" "" "" "" "" "" "") "" "") ("dev.picmnt" "/moises@dev.picmnt.com:/home/moises/Dev/Picmnt" "/moises@dev.picmnt.com:/home/moises/Dev/picmnt_TAGS" nil "" nil (("" . "") "" "" "" "" "" "" "" "") "" "") ("Picmnt" "~/Dev/Picmnt/" "~/Dev/Picmnt_TAGS" nil "~/Dev/Picmnt/app/phpunit.xml" nil (("" . "") "" "" "" "" "" "" "" "") "" "") ("Auth" "~/Dev/Auth/" "~/Dev/TAGS_Auth" nil "~/Dev/Auth/app/phpunit.xml" nil (("" . "") "" "" "" "" "" "" "" "") "" "") ("Sandbox" "~/Dev/Sandbox/src/" "~/Dev/TAGS_Sandbox" nil "~/Dev/Sandbox/app/phpunit.xml" nil (("" . "") "" "" "" "" "" "" "" "") "" "") ("Core" "~/Dev/Core/src/" "~/Dev/TAGS_Core" nil "~/Dev/Core/app/phpunit.xml" nil (("" . "") "" "" "" "" "" "" "" "") "" "") ("Legacy" "~/Dev/Legacy/" "~/Dev/TAGS_Legacy" nil "~/Dev/Sandbox/app/phpunit.xml" nil (("" . "") "" "" "" "" "" "" "" "") "" ""))))
  '(phpcs-standard "PSR2")
  '(show-paren-mode t)
  '(tool-bar-mode nil))
+
+(load "~/.emacs.d/work-php-projects")
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -101,7 +109,23 @@
       display-time-load-average nil) 
 (display-time)
 
+(require 'feature-mode)
 
+;;Neotree
+(global-set-key [f8] 'neotree-toggle)
+
+(defun neotree-project-dir ()
+  "Open NeoTree using the git root."
+  (interactive)
+  (let ((project-dir (ffip-project-root))
+	(file-name (buffer-file-name)))
+    (if project-dir
+	(progn
+	  (neotree-dir project-dir)
+	  (neotree-find file-name))
+      (message "Could not find git project root."))))
+
+(global-set-key [f9] 'neotree-project-dir)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;  PERSONAL FUNCTIONS  ;;;;;;;;;;;;;;;;;;
@@ -444,6 +468,9 @@
       (append '(("\\.html?$" . jinja2-mode)) auto-mode-alist))
 
 
+;;feature, cucumber, behat
+(add-to-list 'auto-mode-alist '("\.feature$" . feature-mode))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;JS;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;JAVASCRIPT CONFIGURATION (http://truongtx.me/2014/02/23/set-up-javascript-development-environment-in-emacs/)
 (add-to-list 'auto-mode-alist '("\\.json$" . js-mode))
@@ -486,3 +513,5 @@
   )
 
 (hc-toggle-highlight-trailing-whitespace t)
+
+(require 'iso-transl)
