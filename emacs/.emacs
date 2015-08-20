@@ -104,7 +104,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "Liberation Mono" :foundry "unknown" :slant normal :weight normal :height 90 :width normal)))))
+ '(default ((t (:family "Liberation Mono" :foundry "unknown" :slant normal :weight normal :height 105 :width normal)))))
 (setq display-time-24hr-format t    
       display-time-load-average nil) 
 (display-time)
