@@ -383,6 +383,8 @@
 (set-selection-coding-system 'utf-8)
 (prefer-coding-system 'utf-8)
 
+(set-face-attribute 'default nil :height 110)
+
 (defun sacha/increase-font-size ()
   (interactive)
   (set-face-attribute 'default
