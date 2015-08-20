@@ -97,7 +97,7 @@
  '(show-paren-mode t)
  '(tool-bar-mode nil))
 
-(load "~/.emacs.d/work-php-projects")
+
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -515,3 +515,13 @@
 (hc-toggle-highlight-trailing-whitespace t)
 
 (require 'iso-transl)
+
+;;Load not versionable configurations
+(if (file-exists-p "~/.emacs.d/work-php-projects")
+    (load "~/.emacs.d/work-php-projects"))
+
+(if (file-exists-p "~/.emacs.d/epa-config")
+    (load "~/.emacs.d/epa-config"))
+
+(if (file-exists-p "~/.emacs.d/org-config")
+    (load "~/.emacs.d/org-config"))
