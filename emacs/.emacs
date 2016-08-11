@@ -222,6 +222,8 @@
 (define-key global-map "\C-ca" 'org-agenda)
 (setq org-log-done t)
 
+(add-hook 'org-mode-hook (lambda () (setq auto-save-default nil)))
+
 
 ;;; yasnippet
 ;;; should be loaded before auto complete so that they can work together
