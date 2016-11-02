@@ -319,6 +319,20 @@
   (indent-region inicio (point))
 )
 
+
+
+(defun php-cs-fixer ()
+  "fix-php-cs-problems"
+  (interactive)
+  (shell-command
+   (concat
+    "php "
+    (expand-file-name "bin/php-cs-fixer fix --verbose " (eproject-root))
+    (buffer-file-name)))
+  (revert-buffer)
+)
+
+
 (defun jean-claude-die (var)
   "print-a-php-var-dump"
   (interactive "sVar:")
