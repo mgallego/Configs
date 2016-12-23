@@ -1,6 +1,6 @@
 sudo add-apt-repository ppa:stefansundin/truecrypt
 sudo apt-get update
-sudo apt-get install alacarte cryptsetup nfs-common truecrypt
+sudo apt-get install alacarte cryptsetup nfs-common truecrypt arduino arduino-core
 
 
 echo "Descargar dropbox, virtualbox,  vagrant y hubic"
