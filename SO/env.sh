@@ -1,7 +1,7 @@
 #!/bin/sh
 
 #Install minimun applications
-sudo apt-get install git emacs tmux zsh
+sudo apt-get install git emacs tmux zsh exuberant-ctags
 
 #ohmyzsh
 rm -rf ~/.oh-my-zsh
