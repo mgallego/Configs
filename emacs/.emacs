@@ -85,6 +85,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(column-number-mode t)
+ '(cua-mode t nil (cua-base))
  '(custom-enabled-themes (quote (wombat)))
  '(display-time-mode t)
  '(font-use-system-font t)
@@ -94,6 +95,9 @@
     (find-file-in-project neotree restclient web-beautify paredit js2-refactor highlight-chars flymake-jslint flycheck feature-mode ac-js2)))
  '(php+-mode-show-project-in-modeline t)
  '(phpcs-standard "PSR2")
+ '(phpmd-rulesets (quote (unusedcode)))
+ '(phpmd-shell-command "~/bin/php/phpmd")
+ '(phpunit-shell-command "~/bin/php/phpunit")
  '(show-paren-mode t)
  '(tool-bar-mode nil))
 
@@ -202,6 +206,17 @@
 (c-set-offset 'arglist-intro '+) ; for FAPI arrays and DBTNG
 (c-set-offset 'arglist-cont-nonempty 'c-lineup-math)
 
+
+(defun php-cs-fixer ()
+  "fix-php-cs-problems"
+  (interactive)
+  (shell-command
+   (concat
+    "php "
+    (expand-file-name "bin/php-cs-fixer fix --verbose " (eproject-root))
+    (buffer-file-name)))
+  (revert-buffer)
+  )
 
 ;;HTML
 (add-hook 'html-mode-hook
@@ -529,3 +544,12 @@
 
 (if (file-exists-p "~/.emacs.d/org-config")
     (load "~/.emacs.d/org-config"))
+(add-hook 'after-init-hook #'global-flycheck-mode)
+(setq flycheck-php-executable "php")
+(setq flycheck-php-phpcs-executable "~/bin/php/phpcs")
+(setq flycheck-phpcs-standard "PSR2")
+(setq flycheck-phpmd-rulesets "unusedcode")
+(setq flycheck-php-phpmd-executable "~/bin/php/phpmd")
+(setq flycheck-global-modes '(php+-mode))
+(add-hook 'php+-mode-hook 'flycheck-mode)
+
