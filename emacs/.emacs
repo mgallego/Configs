@@ -62,7 +62,7 @@
 (when (not package-archive-contents)
   (package-refresh-contents))
 (defvar mgallego/packages
-  '(ac-js2 js2-mode yasnippet paredit flycheck web-beautify js2-refactor highlight-chars flymake-easy flymake-jslint feature-mode restclient find-file-in-project neotree ))
+  '(ac-js2 js2-mode yasnippet paredit flycheck web-beautify js2-refactor highlight-chars flymake-easy flymake-jslint feature-mode restclient find-file-in-project neotree fiplr ))
 (dolist (p mgallego/packages)
   (when (not (package-installed-p p))
     (package-install p)))
@@ -85,7 +85,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(column-number-mode t)
- '(cua-mode t nil (cua-base))
+ ;; '(cua-mode t nil (cua-base))
  '(custom-enabled-themes (quote (wombat)))
  '(display-time-mode t)
  '(font-use-system-font t)
@@ -100,7 +100,6 @@
  '(phpunit-shell-command "~/bin/php/phpunit")
  '(show-paren-mode t)
  '(tool-bar-mode nil))
-
 
 
 (custom-set-faces
@@ -130,6 +129,8 @@
       (message "Could not find git project root."))))
 
 (global-set-key [f9] 'neotree-project-dir)
+;; open neotree in current file dir
+(setq neo-smart-open t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;  PERSONAL FUNCTIONS  ;;;;;;;;;;;;;;;;;;
@@ -243,9 +244,9 @@
 ;;; yasnippet
 ;;; should be loaded before auto complete so that they can work together
 (require 'yasnippet)
-;; (setq yas-snippet-dirs
-;;       '("~/.emacs.modes/yasnippet"
-;;         ))
+(setq yas-snippet-dirs
+      '("~/.emacs.modes/yasnippet-php-mode"
+        ))
 (yas-global-mode 1)
 
 ;;AUTOCOMPLETE
@@ -414,7 +415,7 @@
 (set-selection-coding-system 'utf-8)
 (prefer-coding-system 'utf-8)
 
-(set-face-attribute 'default nil :height 110)
+(set-face-attribute 'default nil :height 90)
 
 (defun sacha/increase-font-size ()
   (interactive)
@@ -558,6 +559,7 @@
 
 (if (file-exists-p "~/.emacs.d/org-config")
     (load "~/.emacs.d/org-config"))
+
 (add-hook 'after-init-hook #'global-flycheck-mode)
 (setq flycheck-php-executable "php")
 (setq flycheck-php-phpcs-executable "~/bin/php/phpcs")
@@ -567,3 +569,9 @@
 (setq flycheck-global-modes '(php+-mode))
 (add-hook 'php+-mode-hook 'flycheck-mode)
 
+;; fiplr is a plugin as vim fluzzyfind
+(require 'fiplr)
+(setq fiplr-root-markers '(".git" ".svn"))
+(setq fiplr-ignored-globs '((directories (".git" ".svn" "vendor"))
+                            (files ("*.jpg" "*.png" "*.zip" "*~"))))
+(global-set-key (kbd "C-x f") 'fiplr-find-file)
