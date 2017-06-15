@@ -62,7 +62,7 @@
 (when (not package-archive-contents)
   (package-refresh-contents))
 (defvar mgallego/packages
-  '(ac-js2 js2-mode yasnippet paredit flycheck web-beautify js2-refactor highlight-chars flymake-easy flymake-jslint feature-mode restclient find-file-in-project neotree fiplr ))
+  '(ac-js2 js2-mode yasnippet paredit flycheck web-beautify js2-refactor highlight-chars flymake-easy flymake-jslint feature-mode restclient find-file-in-project neotree fiplr helm helm-etags-plus ace-jump-mode ))
 (dolist (p mgallego/packages)
   (when (not (package-installed-p p))
     (package-install p)))
@@ -85,7 +85,6 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(column-number-mode t)
- ;; '(cua-mode t nil (cua-base))
  '(custom-enabled-themes (quote (wombat)))
  '(display-time-mode t)
  '(font-use-system-font t)
@@ -99,6 +98,7 @@
  '(phpmd-shell-command "~/bin/php/phpmd")
  '(phpunit-shell-command "~/bin/php/phpunit")
  '(show-paren-mode t)
+ '(tag-shell-command "ctags")
  '(tool-bar-mode nil))
 
 
@@ -580,3 +580,14 @@
 (setq fiplr-ignored-globs '((directories (".git" ".svn" "vendor" "provisioning" "bin" "docs" "swagger-converter" "suagger2" "tests" "web"))
                             (files ("*.jpg" "*.png" "*.zip" "*~"))))
 (global-set-key (kbd "C-x f") 'fiplr-find-file)
+
+
+;; helm
+(require 'helm-config)
+
+(require 'helm-etags-plus)
+(global-set-key (kbd "C-.") 'helm-etags-plus-select)
+
+;; Ace-Jump
+(require 'ace-jump-mode)
+(define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
