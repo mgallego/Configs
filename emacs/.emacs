@@ -338,6 +338,11 @@
 )
 
 
+(defun show-php-functions ()
+  "show-php-functions"
+  (interactive)
+  (occur "function")
+)
 
 (defun php-cs-fixer ()
   "fix-php-cs-problems"
@@ -572,6 +577,6 @@
 ;; fiplr is a plugin as vim fluzzyfind
 (require 'fiplr)
 (setq fiplr-root-markers '(".git" ".svn"))
-(setq fiplr-ignored-globs '((directories (".git" ".svn" "vendor"))
+(setq fiplr-ignored-globs '((directories (".git" ".svn" "vendor" "provisioning" "bin" "docs" "swagger-converter" "suagger2" "tests" "web"))
                             (files ("*.jpg" "*.png" "*.zip" "*~"))))
 (global-set-key (kbd "C-x f") 'fiplr-find-file)
