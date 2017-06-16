@@ -11,6 +11,7 @@ ZSH_THEME="robbyrussell"
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias gitst="git status | cowsay -n"
+alias update_system="sudo apt-get update && sudo apt-get dist-upgrade"
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
@@ -30,7 +31,7 @@ alias gitst="git status | cowsay -n"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git, ssh-agent)
+plugins=(git, ssh-agent, sudo)
 
 source $ZSH/oh-my-zsh.sh
 
