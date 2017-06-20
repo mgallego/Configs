@@ -21,7 +21,7 @@
  '(nxml-child-indent 4)
  '(package-selected-packages
    (quote
-    (find-file-in-project neotree restclient web-beautify paredit js2-refactor highlight-chars flymake-jslint flycheck feature-mode)))
+    (find-file-in-project neotree restclient web-beautify paredit js2-refactor highlight-chars flymake-jslint flycheck feature-mode magit)))
  '(php+-mode-show-project-in-modeline t)
  '(phpcs-standard "PSR2")
  '(phpmd-rulesets (quote (unusedcode)))
@@ -390,8 +390,8 @@
 ;; fiplr is a plugin as vim fluzzyfind
 (require 'fiplr)
 (setq fiplr-root-markers '(".git" ".svn"))
-(setq fiplr-ignored-globs '((directories (".git" ".svn" "vendor" "provisioning" "bin" "docs" "swagger-converter" "swagger2" "tests" "web"))
-                            (files ("*.jpg" "*.png" "*.zip" "*~"))))
+(setq fiplr-ignored-globs '((directories (".git" ".svn" "vendor" "provisioning" "bin" "docs" "swagger-converter" "swagger2" "tests" "web" "venv"))
+                            (files ("*.jpg" "*.png" "*.zip" "*~" "*.pyc"))))
 (global-set-key (kbd "C-x f") 'fiplr-find-file)
 
 ;; helm
@@ -400,7 +400,7 @@
 (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
 (global-set-key (kbd "C-x C-b") 'helm-buffers-list)
 (global-set-key (kbd "M-y") 'helm-show-kill-ring)
-(global-set-key (kbd "C-x C-f") 'helm-find-files)
+;; (global-set-key (kbd "C-x C-f") 'helm-find-files)
 (require 'helm-etags-plus)
 (global-set-key (kbd "C-.") 'helm-etags-plus-select)
 
@@ -418,6 +418,7 @@
 (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
 (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
 
+(require 'magit)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;END MINOR MODES;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;MY OWN FUNCTIONS;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

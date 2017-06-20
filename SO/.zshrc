@@ -11,7 +11,7 @@ ZSH_THEME="robbyrussell"
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias gitst="git status | cowsay -n"
-alias update_system="sudo apt-get update && sudo apt-get dist-upgrade"
+alias update_system="sudo apt-get update && yes | sudo apt-get dist-upgrade && yes |sudo apt autoremove"
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
