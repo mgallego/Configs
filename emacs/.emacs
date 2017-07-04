@@ -17,12 +17,25 @@
  '(column-number-mode t)
  '(custom-enabled-themes (quote (wombat)))
  '(display-time-mode t)
+ '(elfeed-feeds (quote ("https://lamiradadelreplicante.com/feed/")))
  '(font-use-system-font t)
  '(nxml-child-indent 4)
  '(package-selected-packages
    (quote
     (find-file-in-project neotree restclient web-beautify paredit js2-refactor highlight-chars flymake-jslint flycheck feature-mode magit)))
  '(php+-mode-show-project-in-modeline t)
+ '(php-project-list
+   (quote
+    (("km77" "~/Dev/km77.com/src/" "~/Dev/TAGS/km77" nil "" nil
+      (("" . "")
+       "" "" "" "" "" "" "" "")
+      "" "")
+     ("fapi" "~/Dev/fapi/src/" "~/Dev/TAGS/fapi"
+      ("~/Dev/fapi/vendor/")
+      "~/Dev/fapi/app" nil
+      (("" . "")
+       "" "" "" "" "" "" "" "")
+      "Km77" ""))))
  '(phpcs-standard "PSR2")
  '(phpmd-rulesets (quote (unusedcode)))
  '(phpmd-shell-command "~/bin/php/phpmd")
@@ -33,7 +46,13 @@
 
 
 (custom-set-faces
- '(default ((t (:family "Liberation Mono" :foundry "unknown" :slant normal :weight normal :height 100 :width normal)))))
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(default ((t (:family "Liberation Mono" :foundry "unknown" :slant normal :weight normal :height 100 :width normal))))
+ '(elfeed-search-date-face ((t :foreground "#f0f" :weight extra-bold :underline t)))
+ '(elfeed-search-title-face ((t :foreground "#f0f" :weight extra-bold :underline t))))
 (setq display-time-24hr-format t    
       display-time-load-average nil) 
 (display-time)
@@ -419,6 +438,25 @@
 (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
 
 (require 'magit)
+(require 'elfeed)
+(require 'elfeed-org)
+
+(setq elfeed-db-directory "~/Dropbox/Shared/elfeeddb")
+(setq elfeed-feeds
+      '("http://nullprogram.com/"
+        "http://planet.emacsen.org/atom.xml"
+	("https://elbinario.net/feed/" softlibre privacidad hacking)
+	"https://lamiradadelreplicante.com/feed/"
+	))
+(global-set-key (kbd "C-x w") 'elfeed)
+
+
+
+
+
+(elfeed-org)
+(setq rmh-elfeed-org-files (list "~/Dropbox/Shared/elfeed.org"))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;END MINOR MODES;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;MY OWN FUNCTIONS;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
