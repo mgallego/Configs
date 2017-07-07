@@ -59,6 +59,7 @@
 (setq flycheck-phpcs-standard "PSR2")
 (setq flycheck-phpmd-rulesets "unusedcode")
 (setq flycheck-php-phpmd-executable "~/bin/php/phpmd")
+;; @TODO Revisar modos
 (setq flycheck-global-modes '(php+-mode))
 (add-hook 'php-mode-hook 'flycheck-mode)
 
