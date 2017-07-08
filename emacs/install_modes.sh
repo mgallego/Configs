@@ -35,11 +35,7 @@ git clone https://github.com/mgallego/sf.el.git
 
 # Crear un bucle que vaya creando los enlaces simbólicos
 
-ln -s ~/Dev/Configs/emacs/configs/epa-config ~/.emacs.d
-ln -s ~/Dev/Configs/emacs/configs/faces.el ~/.emacs.d
-ln -s ~/Dev/Configs/emacs/configs/init-helm.el ~/.emacs.d
-ln -s ~/Dev/Configs/emacs/configs/org-config ~/.emacs.d
-ln -s ~/Dev/Configs/emacs/configs/packages.el ~/.emacs.d
-ln -s ~/Dev/Configs/emacs/configs/php.el ~/.emacs.d
-ln -s ~/Dev/Configs/emacs/configs/system.el ~/.emacs.d
-
+cd configs
+for f in *.el; do
+    ln -s $PWD/$f ~/.emacs.d
+done
