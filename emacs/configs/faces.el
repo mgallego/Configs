@@ -1,3 +1,7 @@
+(setq tool-bar-mode nil)
+(global-linum-mode t)
+(setq tool-bar-mode nil)
+
 (custom-set-variables
 
  '(column-number-mode t)
