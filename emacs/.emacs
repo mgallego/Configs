@@ -1,3 +1,4 @@
+(setq make-backup-files nil)
 (add-to-list 'load-path "~/.emacs.modes")
 
 (defun load-user-file (file) (interactive "f")

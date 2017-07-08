@@ -22,6 +22,8 @@
     helm-projectile
     company
     ac-php
+    docker
+    magit
     )
   "Packages which should be installed upon launch"
   )
