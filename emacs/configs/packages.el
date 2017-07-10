@@ -24,6 +24,8 @@
     ac-php
     docker
     magit
+    multiple-cursors
+    less-css-mode
     )
   "Packages which should be installed upon launch"
   )
