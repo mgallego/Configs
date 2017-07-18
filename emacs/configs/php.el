@@ -4,6 +4,7 @@
 (setq-default fci-rule-column 120)
 (setq fci-handle-truncate-lines nil)
 (add-hook 'php-mode-hook 'auto-fci-mode)
+(add-hook 'php+-mode-hook 'auto-fci-mode)
 (defun auto-fci-mode (&optional unused)
   (if (> (frame-width) 80)
       (fci-mode 1)
@@ -78,3 +79,5 @@
     (buffer-file-name)))
   (revert-buffer)
 )
+
+(require 'php+-mode)

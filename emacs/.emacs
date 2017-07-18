@@ -4,7 +4,6 @@
 
 (defun load-user-file (file) (interactive "f")
   "Load a file in current user's configuration directory"
-  ;; (load-file (expand-file-name file user-init-dir)))
   (if (file-exists-p (expand-file-name file "~/.emacs.d"))
       (load-file (expand-file-name file "~/.emacs.d")))
   )

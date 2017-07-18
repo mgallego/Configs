@@ -26,6 +26,8 @@
     magit
     multiple-cursors
     less-css-mode
+    fiplr
+    helm-etags-plus    
     )
   "Packages which should be installed upon launch"
   )
