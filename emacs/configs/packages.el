@@ -27,7 +27,9 @@
     multiple-cursors
     less-css-mode
     fiplr
-    helm-etags-plus    
+    helm-etags-plus
+    virtualenvwrapper
+    jedi
     )
   "Packages which should be installed upon launch"
   )

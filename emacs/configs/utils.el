@@ -17,3 +17,5 @@
 
 (require 'helm-etags-plus)
 (global-set-key (kbd "C-.") 'helm-etags-plus-select)
+
+(hc-toggle-highlight-trailing-whitespace t)
