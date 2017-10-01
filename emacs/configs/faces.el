@@ -17,8 +17,8 @@
 (custom-set-faces
  '(default ((t (:family "Liberation Mono" :foundry "unknown" :slant normal :weight normal :height 100 :width normal))))
  )
-(setq display-time-24hr-format t    
-      display-time-load-average nil) 
+(setq display-time-24hr-format t
+      display-time-load-average nil)
 (display-time)
 
 (defun toggle-fullscreen (&optional f)
@@ -64,3 +64,5 @@
 	    (setq indent-tabs-mode t)
 	    (setq tab-width 4)
 	    (setq c-basic-indent 4)))
+
+(tool-bar-mode -1)

@@ -30,6 +30,10 @@
     helm-etags-plus
     virtualenvwrapper
     jedi
+    ace-jump-mode
+    highlight-chars
+    swiper-helm
+    which-key
     )
   "Packages which should be installed upon launch"
   )

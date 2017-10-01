@@ -13,9 +13,24 @@
 (setq fiplr-root-markers '(".git" ".svn"))
 (setq fiplr-ignored-globs '((directories (".git" ".svn" "vendor" "provisioning" "bin" "docs" "swagger-converter" "swagger2" "tests" "web" "venv"))
                             (files ("*.jpg" "*.png" "*.zip" "*~" "*.pyc"))))
-(global-set-key (kbd "C-x f") 'fiplr-find-file)
+;; (global-set-key (kbd "C-x f") 'fiplr-find-file)
 
 (require 'helm-etags-plus)
 (global-set-key (kbd "C-.") 'helm-etags-plus-select)
 
 (hc-toggle-highlight-trailing-whitespace t)
+
+
+;; https://www.emacswiki.org/emacs/AceJump
+(require 'ace-jump-mode)
+(define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
+
+
+(require 'swiper-helm)
+(define-key global-map (kbd "C-s") 'swiper-helm)
+
+(require 'which-key)
+(which-key-mode)
+
+(define-key global-map (kbd "C-c g") 'magit-status)
+

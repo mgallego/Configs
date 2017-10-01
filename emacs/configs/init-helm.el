@@ -9,3 +9,6 @@
 
 (require 'helm-etags-plus)
 (global-set-key (kbd "M-.") 'helm-etags-plus-select)
+
+(global-set-key (kbd "C-x f") 'helm-projectile-find-file-dwim)
+

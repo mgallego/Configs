@@ -1,4 +1,4 @@
-(require 'php-mode)
+;; (require 'php-mode)
 	 
 ;;COLUMN WARNING
 (setq-default fci-rule-column 120)
