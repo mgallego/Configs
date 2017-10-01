@@ -5,6 +5,12 @@
 ;; Either the Key ID or set to nil to use symmetric encryption.
 (setq org-crypt-key nil)
 
+;; (add-hook 'org-mode-hook
+;;       '(lambda ()
+;;          (setq my-org-mode-autosave-settings t)
+;;          (setq linum-mode nil)
+;;          ))
+
 (add-hook 'org-mode-hook 'my-org-mode-autosave-settings)
 (defun my-org-mode-autosave-settings ()
   ;; (auto-save-mode 1)   ; this is unnecessary as it is on by default
