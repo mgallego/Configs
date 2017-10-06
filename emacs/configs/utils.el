@@ -18,8 +18,7 @@
 (require 'helm-etags-plus)
 (global-set-key (kbd "C-.") 'helm-etags-plus-select)
 
-(hc-toggle-highlight-trailing-whitespace t)
-
+;; (hc-toggle-highlight-trailing-whitespace t)
 
 ;; https://www.emacswiki.org/emacs/AceJump
 (require 'ace-jump-mode)
@@ -33,4 +32,3 @@
 (which-key-mode)
 
 (define-key global-map (kbd "C-c g") 'magit-status)
-
