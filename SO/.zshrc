@@ -13,6 +13,8 @@ ZSH_THEME="robbyrussell"
 alias gitst="git status | cowsay -n"
 alias update_system="sudo apt-get update && yes | sudo apt-get dist-upgrade && yes |sudo apt-get autoremove && notify-send 'Sistema Actualizado'"
 alias kms="php /data/Dev/km77-aws-instance-connector/SshConnectToAwsInstance.php"
+#pip install Pygments
+alias pcat="pygmentize -f terminal256 -O style=native -g"
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
