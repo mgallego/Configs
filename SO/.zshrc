@@ -11,7 +11,8 @@ ZSH_THEME="robbyrussell"
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias gitst="git status | cowsay -n"
-alias update_system="sudo apt-get update && yes | sudo apt-get dist-upgrade && yes |sudo apt autoremove"
+alias update_system="sudo apt-get update && yes | sudo apt-get dist-upgrade && yes |sudo apt-get autoremove && notify-send 'Sistema Actualizado'"
+alias kms="php /data/Dev/km77-aws-instance-connector/SshConnectToAwsInstance.php"
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
@@ -31,12 +32,12 @@ alias update_system="sudo apt-get update && yes | sudo apt-get dist-upgrade && y
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git, ssh-agent, sudo)
+plugins=(git, ssh-agent, sudo, web-search)
 
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-export PATH=/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:~/bin
+export PATH=/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:~/bin:/home/moises/.local/bin/
 
 PROMPT='%M %{$fg_bold[red]%}➜ %{$fg_bold[green]%}%p %{$fg[cyan]%}%~ %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}$ '
 

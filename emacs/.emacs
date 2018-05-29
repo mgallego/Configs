@@ -34,8 +34,8 @@
 
 (custom-set-faces
  '(default ((t (:family "Liberation Mono" :foundry "unknown" :slant normal :weight normal :height 100 :width normal)))))
-(setq display-time-24hr-format t    
-      display-time-load-average nil) 
+(setq display-time-24hr-format t
+      display-time-load-average nil)
 (display-time)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;END GENERAL CONFIG;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -125,10 +125,10 @@
 (setq c-basic-offset 4) ; 2 tabs indenting
 (setq indent-tabs-mode nil)
 (add-hook 'html-mode-hook
-	  (lambda ()
-	    (setq indent-tabs-mode t)
-	    (setq tab-width 4)
-	    (setq c-basic-indent 4)))
+          (lambda ()
+            (setq indent-tabs-mode t)
+            (setq tab-width 4)
+            (setq c-basic-indent 4)))
 
 ;;COLUMN WARNING
 (setq-default fci-rule-column 120)
@@ -309,11 +309,11 @@
   "Open NeoTree using the git root."
   (interactive)
   (let ((project-dir (ffip-project-root))
-	(file-name (buffer-file-name)))
+        (file-name (buffer-file-name)))
     (if project-dir
-	(progn
-	  (neotree-dir project-dir)
-	  (neotree-find file-name))
+        (progn
+          (neotree-dir project-dir)
+          (neotree-find file-name))
       (message "Could not find git project root."))))
 
 (global-set-key [f9] 'neotree-project-dir)
@@ -356,12 +356,12 @@
 
 ;;LOREM IPSUM
 (add-hook 'sgml-mode-hook (lambda ()
-			    (setq Lorem-ipsum-paragraph-separator "<br><br>\n"
-				  Lorem-ipsum-sentence-separator "&nbsp;&nbsp;"
-				  Lorem-ipsum-list-beginning "<ul>\n"
-				  Lorem-ipsum-list-bullet "<li>"
-				  Lorem-ipsum-list-item-end "</li>\n"
-				  Lorem-ipsum-list-end "</ul>\n")))
+                            (setq Lorem-ipsum-paragraph-separator "<br><br>\n"
+                                  Lorem-ipsum-sentence-separator "&nbsp;&nbsp;"
+                                  Lorem-ipsum-list-beginning "<ul>\n"
+                                  Lorem-ipsum-list-bullet "<li>"
+                                  Lorem-ipsum-list-item-end "</li>\n"
+                                  Lorem-ipsum-list-end "</ul>\n")))
 
 ;;POMODORO
 (global-set-key (kbd "<f12>") 'tomatinho)
@@ -373,7 +373,7 @@
 (add-to-list 'auto-mode-alist '("\\.markdown" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.md" . markdown-mode))
 
-(hc-toggle-highlight-trailing-whitespace t)
+;; (hc-toggle-highlight-trailing-whitespace t)
 
 (require 'iso-transl)
 
@@ -390,14 +390,14 @@
 ;; fiplr is a plugin as vim fluzzyfind
 (require 'fiplr)
 (setq fiplr-root-markers '(".git" ".svn"))
-(setq fiplr-ignored-globs '((directories (".git" ".svn" "vendor" "provisioning" "bin" "docs" "swagger-converter" "swagger2" "tests" "web" "venv"))
-                            (files ("*.jpg" "*.png" "*.zip" "*~" "*.pyc"))))
-(global-set-key (kbd "C-x f") 'fiplr-find-file)
+(setq fiplr-ignored-globs '((directories (".git" ".svn" "vendor" "provisioning" "bin" "docs" "swagger-converter" "swagger2" "tests" "web" ".ebextensions" "features" "gulp-tasks" "node_modules" ".vagrant"))
+                            (files ("*.jpg" "*.png" "*.zip" "*~"))))
+;; (global-set-key (kbd "C-x f") 'fiplr-find-file)
 
 ;; helm
 (require 'helm)
 (require 'helm-config)
-(define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
+;; (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
 (global-set-key (kbd "C-x C-b") 'helm-buffers-list)
 (global-set-key (kbd "M-y") 'helm-show-kill-ring)
 ;; (global-set-key (kbd "C-x C-f") 'helm-find-files)
@@ -406,7 +406,7 @@
 
 ;; Ace-Jump
 (require 'ace-jump-mode)
-(define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
+(define-key global-map (kbd "C-c SPC") 'ace-jump-char-mode)
 
 ;; expand-region
 (require 'expand-region)
@@ -541,3 +541,18 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;END NON VERSIONABLES FILES;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; Pendiente de refactor
+
+(require 'swiper-helm)
+(define-key global-map (kbd "C-s") 'swiper-helm)
+
+(require 'which-key)
+(which-key-mode)
+
+(define-key global-map (kbd "C-c g") 'magit-status)
+
+(require 'helm-projectile)
+ global-set-key (kbd "C-x f") 'helm-projectile-find-file)
+
+(global-set-key (kbd "C-x r b") 'helm-bookmarks)
+(global-set-key (kbd "C-x m") 'helm-M-x)
