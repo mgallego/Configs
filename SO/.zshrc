@@ -15,6 +15,9 @@ alias update_system="sudo apt-get update && yes | sudo apt-get dist-upgrade && y
 alias kms="php /data/Dev/km77-aws-instance-connector/SshConnectToAwsInstance.php"
 #pip install Pygments
 alias pcat="pygmentize -f terminal256 -O style=native -g"
+alias dce="docker-compose exec web bash"
+alias dcu="docker-compose up -d"
+alias dcd="docker-compose down"
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
