@@ -12,7 +12,8 @@ ZSH_THEME="robbyrussell"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias gitst="git status | cowsay -n"
 alias update_system="sudo apt-get update && yes | sudo apt-get dist-upgrade && yes |sudo apt-get autoremove && notify-send 'Sistema Actualizado'"
-alias kms="php /data/Dev/km77-aws-instance-connector/SshConnectToAwsInstance.php"
+alias kms="php ~/Dev/km77-aws-instance-connector/SshConnectToAwsInstance.php"
+alias ams="php ~/Dev/Arpem/arpem-server-connector/SshConnectToServer.php"
 #pip install Pygments
 alias pcat="pygmentize -f terminal256 -O style=native -g"
 alias dce="docker-compose exec web bash"
@@ -42,7 +43,7 @@ plugins=(git, ssh-agent, sudo, web-search)
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-export PATH=/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:~/bin:/home/moises/.local/bin/
+export PATH=/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:~/bin:~/.local/bin/:/snap/bin:/opt/linuxtrack/bin
 
 PROMPT='%M %{$fg_bold[red]%}➜ %{$fg_bold[green]%}%p %{$fg[cyan]%}%~ %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}$ '
 
