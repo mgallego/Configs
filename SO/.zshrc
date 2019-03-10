@@ -12,7 +12,7 @@ ZSH_THEME="robbyrussell"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias gitst="git status | cowsay -n"
 alias update_system="sudo apt-get update && yes | sudo apt-get dist-upgrade && yes |sudo apt-get autoremove && notify-send 'Sistema Actualizado'"
-alias kms="php ~/Dev/km77-aws-instance-connector/SshConnectToAwsInstance.php"
+alias kms="php ~/Dev/km77-infrastructure/aws-instance-connector/SshConnectToAwsInstance.php"
 alias ams="php ~/Dev/Arpem/arpem-server-connector/SshConnectToServer.php"
 #pip install Pygments
 alias pcat="pygmentize -f terminal256 -O style=native -g"
